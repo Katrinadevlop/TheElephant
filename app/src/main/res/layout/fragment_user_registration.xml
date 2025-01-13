@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".UserRegistration">
+
+    <TextView
+        android:id="@+id/registrationTextView"
+        style="@style/TitleText"
+        android:text="@string/regsitration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/nameEditText"
+        style="@style/EditTextStyle"
+        android:hint="@string/name"
+        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="153dp" />
+
+    <EditText
+        android:id="@+id/surnameEditText"
+        style="@style/EditTextStyle"
+        android:hint="@string/surname"
+        tools:layout_editor_absoluteX="72dp"
+        tools:layout_editor_absoluteY="26dp" />
+
+    <EditText
+        android:id="@+id/editTextEmailAddress"
+        style="@style/EditTextStyle"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="368dp" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        style="@style/EditTextStyle"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="454dp" />
+
+    <EditText
+        android:id="@+id/editTextPasswordRepeat"
+        style="@style/EditTextStyle"
+        android:hint="@string/repeat_password"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="105dp"
+        tools:layout_editor_absoluteY="520dp" />
+
+    <Button
+        android:id="@+id/registrationButton"
+        style="@style/ButtonStyle"
+        android:backgroundTint="@color/blue"
+        android:text="@string/register"
+        tools:layout_editor_absoluteX="115dp"
+        tools:layout_editor_absoluteY="586dp" />
+
+    <TextView
+        android:id="@+id/linkTextView"
+        style="@style/LinkText"
+        android:layout_marginTop="10dp"
+        android:text="@string/have_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

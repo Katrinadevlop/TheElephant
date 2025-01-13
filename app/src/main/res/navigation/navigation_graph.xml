@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/userRegistration">
+
+    <fragment
+        android:id="@+id/calendarRecording"
+        android:name="com.example.theelephant.CalendarRecording"
+        android:label="fragment_calendar_recording"
+        tools:layout="@layout/fragment_calendar_recording" />
+    <fragment
+        android:id="@+id/navigationButton"
+        android:name="com.example.theelephant.NavigationButton"
+        android:label="fragment_navigation_button"
+        tools:layout="@layout/fragment_navigation_button" >
+        <action
+            android:id="@+id/action_navigationButton_to_calendarRecording"
+            app:destination="@id/calendarRecording" />
+        <action
+            android:id="@+id/action_navigationButton_to_personalAccount"
+            app:destination="@id/personalAccount" />
+    </fragment>
+    <fragment
+        android:id="@+id/userRegistration"
+        android:name="com.example.theelephant.UserRegistration"
+        android:label="fragment_user_registration"
+        tools:layout="@layout/fragment_user_registration" >
+        <action
+            android:id="@+id/action_userRegistration_to_navigationButton"
+            app:destination="@id/navigationButton" />
+    </fragment>
+    <fragment
+        android:id="@+id/personalAccount"
+        android:name="com.example.theelephant.PersonalAccount"
+        android:label="fragment_personal_account"
+        tools:layout="@layout/fragment_personal_account" />
+</navigation>
