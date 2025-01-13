@@ -11,62 +11,46 @@
     <TextView
         android:id="@+id/registrationTextView"
         style="@style/TitleText"
-        android:text="@string/regsitration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:text="@string/registrations" />
 
     <EditText
         android:id="@+id/nameEditText"
         style="@style/EditTextStyle"
-        android:hint="@string/name"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="153dp" />
+        android:hint="@string/name" />
 
     <EditText
         android:id="@+id/surnameEditText"
         style="@style/EditTextStyle"
-        android:hint="@string/surname"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="26dp" />
+        android:hint="@string/surname" />
 
     <EditText
-        android:id="@+id/editTextEmailAddress"
+        android:id="@+id/editTextPhone"
         style="@style/EditTextStyle"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="368dp" />
+        android:hint="@string/phone"
+        android:inputType="phone" />
 
     <EditText
         android:id="@+id/editTextPassword"
         style="@style/EditTextStyle"
         android:hint="@string/password"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="454dp" />
+        android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/editTextPasswordRepeat"
         style="@style/EditTextStyle"
         android:hint="@string/repeat_password"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="105dp"
-        tools:layout_editor_absoluteY="520dp" />
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/registrationButton"
         style="@style/ButtonStyle"
         android:backgroundTint="@color/blue"
-        android:text="@string/register"
-        tools:layout_editor_absoluteX="115dp"
-        tools:layout_editor_absoluteY="586dp" />
+        android:text="@string/register"/>
 
     <TextView
         android:id="@+id/linkTextView"
         style="@style/LinkText"
         android:layout_marginTop="10dp"
-        android:text="@string/have_account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:text="@string/have_account"/>
 
 </LinearLayout>

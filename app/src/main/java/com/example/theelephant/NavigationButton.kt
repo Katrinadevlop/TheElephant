@@ -24,20 +24,18 @@ class NavigationButton : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val controller = findNavController()
-
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.calendarButtonMenu -> {
-                    controller.navigate(R.id.calendarRecording)
-                    true
-                }
-                R.id.profileButtonMenu -> {
-                    controller.navigate(R.id.profileButtonMenu)
-                    true
-                }
-                else -> false
+            val selectedFragment: Fragment = when (item.itemId) {
+                R.id.calendarButtonMenu -> CalendarRecording()
+                R.id.profileButtonMenu -> PersonalAccount()
+                else -> return@setOnNavigationItemSelectedListener false
             }
+
+            childFragmentManager
+                .beginTransaction()
+                .replace(R.id.frameLayout, selectedFragment)
+                .commit()
+            true
         }
     }
 }

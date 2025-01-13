@@ -6,22 +6,10 @@
     app:startDestination="@id/userRegistration">
 
     <fragment
-        android:id="@+id/calendarRecording"
-        android:name="com.example.theelephant.CalendarRecording"
-        android:label="fragment_calendar_recording"
-        tools:layout="@layout/fragment_calendar_recording" />
-    <fragment
         android:id="@+id/navigationButton"
         android:name="com.example.theelephant.NavigationButton"
         android:label="fragment_navigation_button"
-        tools:layout="@layout/fragment_navigation_button" >
-        <action
-            android:id="@+id/action_navigationButton_to_calendarRecording"
-            app:destination="@id/calendarRecording" />
-        <action
-            android:id="@+id/action_navigationButton_to_personalAccount"
-            app:destination="@id/personalAccount" />
-    </fragment>
+        tools:layout="@layout/fragment_navigation_button" />
     <fragment
         android:id="@+id/userRegistration"
         android:name="com.example.theelephant.UserRegistration"
@@ -31,9 +19,4 @@
             android:id="@+id/action_userRegistration_to_navigationButton"
             app:destination="@id/navigationButton" />
     </fragment>
-    <fragment
-        android:id="@+id/personalAccount"
-        android:name="com.example.theelephant.PersonalAccount"
-        android:label="fragment_personal_account"
-        tools:layout="@layout/fragment_personal_account" />
 </navigation>
