@@ -25,7 +25,7 @@ class UserRegistration : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.registrationButton.setOnClickListener{
-            findNavController().navigate(R.id.calendarRecording)
+            findNavController().navigate(R.id.navigationButton)
         }
     }
 }
