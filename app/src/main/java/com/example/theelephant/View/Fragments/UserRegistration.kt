@@ -1,12 +1,12 @@
-package com.example.theelephant
+package com.example.theelephant.View.Fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.navigation.fragment.findNavController
+import com.example.theelephant.R
 import com.example.theelephant.databinding.FragmentUserRegistrationBinding
 
 class UserRegistration : Fragment() {
