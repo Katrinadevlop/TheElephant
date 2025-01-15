@@ -19,12 +19,12 @@
             android:id="@+id/action_userRegistration_to_navigationButton"
             app:destination="@id/navigationButton" />
         <action
-            android:id="@+id/action_userRegistration_to_mainActivity"
-            app:destination="@id/mainActivity" />
+            android:id="@+id/action_userRegistration_to_userAuthorization"
+            app:destination="@id/userAuthorization" />
     </fragment>
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.theelephant.View.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/userAuthorization"
+        android:name="com.example.theelephant.View.Fragments.UserAuthorization"
+        android:label="fragment_user_authorization"
+        tools:layout="@layout/fragment_user_authorization" />
 </navigation>

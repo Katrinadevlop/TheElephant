@@ -27,5 +27,9 @@ class UserRegistration : Fragment() {
         binding.registrationButton.setOnClickListener{
             findNavController().navigate(R.id.navigationButton)
         }
+
+        binding.linkTextView.setOnClickListener{
+            findNavController().navigate(R.id.userAuthorization)
+        }
     }
 }
