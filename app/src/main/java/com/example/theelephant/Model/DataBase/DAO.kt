@@ -7,8 +7,7 @@ import androidx.room.Query
 import com.example.theelephant.Model.User
 
 @Dao
-interface DAO {
-    //Parent
+interface ParentDAO {
     @Query("SELECT * FROM parent")
     suspend fun getParent()
 
@@ -16,15 +15,17 @@ interface DAO {
     suspend fun setParent(id: Int): User.Parent
 
     @Query("SELECT * FROM parent WHERE id = :id")
-    suspend fun deleteParent(id:Int)
+    suspend fun deleteParent(id: Int)
 
     @Query("DELETE FROM parent")
     suspend fun deleteAllParent()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertParent(user: User.Parent)
+}
 
-    //MassageTherapist
+@Dao
+interface MassageTherapistDAO {
     @Query("SELECT * FROM massage_therapist")
     suspend fun getMassageTherapist()
 
@@ -32,15 +33,17 @@ interface DAO {
     suspend fun setMassageTherapist(id: Int): User.Parent
 
     @Query("SELECT * FROM massage_therapist WHERE id = :id")
-    suspend fun deleteMassageTherapist(id:Int)
+    suspend fun deleteMassageTherapist(id: Int)
 
     @Query("DELETE FROM massage_therapist")
     suspend fun deleteAllMassageTherapist()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMassageTherapist(user: User.MassageTherapist)
+}
 
-    //Neuropsychologist
+@Dao
+interface NeuropsychologistDAO {
     @Query("SELECT * FROM neuropsychologist")
     suspend fun getNeuropsychologist()
 
@@ -48,15 +51,17 @@ interface DAO {
     suspend fun setNeuropsychologist(id: Int): User.Parent
 
     @Query("SELECT * FROM neuropsychologist WHERE id = :id")
-    suspend fun deleteNeuropsychologist(id:Int)
+    suspend fun deleteNeuropsychologist(id: Int)
 
     @Query("DELETE FROM neuropsychologist")
     suspend fun deleteAllNeuropsychologist()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNeuropsychologist(user: User.Neuropsychologist)
+}
 
-    //Psychologist
+@Dao
+interface PsychologistDAO {
     @Query("SELECT * FROM psychologist")
     suspend fun getPsychologist()
 
@@ -64,15 +69,17 @@ interface DAO {
     suspend fun setPsychologist(id: Int): User.Parent
 
     @Query("SELECT * FROM psychologist WHERE id = :id")
-    suspend fun deletePsychologist(id:Int)
+    suspend fun deletePsychologist(id: Int)
 
     @Query("DELETE FROM psychologist")
     suspend fun deleteAllPsychologist()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPsychologist(user: User.Psychologist)
+}
 
-    //SpeechTherapist
+@Dao
+interface SpeechTherapistDAO {
     @Query("SELECT * FROM speech_therapist")
     suspend fun getSpeechTherapist()
 
@@ -80,15 +87,17 @@ interface DAO {
     suspend fun setSpeechTherapist(id: Int): User.Parent
 
     @Query("SELECT * FROM speech_therapist WHERE id = :id")
-    suspend fun deleteSpeechTherapist(id:Int)
+    suspend fun deleteSpeechTherapist(id: Int)
 
     @Query("DELETE FROM speech_therapist")
     suspend fun deleteAllSpeechTherapist()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertSpeechTherapist(user: User.SpeechTherapist)
+}
 
-    //Tomatis
+@Dao
+interface TomatisDAO {
     @Query("SELECT * FROM tomatis")
     suspend fun getTomatis()
 
@@ -96,15 +105,17 @@ interface DAO {
     suspend fun setTomatis(id: Int): User.Parent
 
     @Query("SELECT * FROM tomatis WHERE id = :id")
-    suspend fun deleteTomatis(id:Int)
+    suspend fun deleteTomatis(id: Int)
 
     @Query("DELETE FROM tomatis")
     suspend fun deleteAllTomatis()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTomatis(user: User.Tomatis)
+}
 
-    //Тeurodefectologist
+@Dao
+interface ТeurodefectologistDAO {
     @Query("SELECT * FROM teurodefectologist")
     suspend fun getТeurodefectologist()
 
