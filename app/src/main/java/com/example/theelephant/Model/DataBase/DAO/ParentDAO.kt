@@ -5,23 +5,24 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.theelephant.Model.DataBase.Entities.Parent
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ParentDAO {
     @Query("SELECT * FROM parent")
-    suspend fun getParent()
+    fun getParent(): Flow<List<Parent>>
 
     @Query("SELECT * FROM parent WHERE id = :id")
-    suspend fun setParent(id: Int): Parent
+    fun setParent(id: Int): Parent
 
     @Query("SELECT * FROM parent WHERE id = :id")
-    suspend fun deleteParent(id: Int)
+    fun deleteParent(id: Int)
 
     @Query("DELETE FROM parent")
-    suspend fun deleteAllParent()
+    fun deleteAllParent()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertParent(parent: Parent)
+    fun insertParent(parent: Parent)
 }
 
 

@@ -2,27 +2,28 @@ package com.example.theelephant.Model.DataBase.Repository
 
 import com.example.theelephant.Model.DataBase.DataBase
 import com.example.theelephant.Model.DataBase.Entities.Тeurodefectologist
+import kotlinx.coroutines.flow.Flow
 
-class TeurodefectologistRepository(private val dataBase:DataBase) {
+class ТeurodefectologistRepository(dataBase:DataBase) {
     private val teurodefectologistDao = dataBase.ТeurodefectologistDao()
 
-    suspend fun getТeurodefectologist(){
-        teurodefectologistDao.getТeurodefectologist()
+     fun getТeurodefectologist(): Flow<List<Тeurodefectologist>> {
+        return teurodefectologistDao.getТeurodefectologist()
     }
 
-    suspend fun setТeurodefectologist(id: Int){
+     fun setТeurodefectologist(id: Int){
         teurodefectologistDao.setТeurodefectologist(id)
     }
 
-    suspend fun deleteТeurodefectologist(id:Int){
+     fun deleteТeurodefectologist(id:Int){
         teurodefectologistDao.deleteТeurodefectologist(id)
     }
 
-    suspend fun deleteAllТeurodefectologist(){
+     fun deleteAllТeurodefectologist(){
         teurodefectologistDao.deleteAllТeurodefectologist()
     }
 
-    suspend fun insertТeurodefectologist(teurodefectologist: Тeurodefectologist){
+     fun insertТeurodefectologist(teurodefectologist: Тeurodefectologist){
         teurodefectologistDao.insertТeurodefectologist(teurodefectologist)
     }
 }

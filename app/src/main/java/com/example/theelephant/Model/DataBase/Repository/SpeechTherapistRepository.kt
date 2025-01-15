@@ -2,27 +2,28 @@ package com.example.theelephant.Model.DataBase.Repository
 
 import com.example.theelephant.Model.DataBase.DataBase
 import com.example.theelephant.Model.DataBase.Entities.SpeechTherapist
+import kotlinx.coroutines.flow.Flow
 
-class SpeechTherapistRepository(private val dataBase: DataBase) {
+class SpeechTherapistRepository(dataBase: DataBase) {
     private val speechTherapistDao = dataBase.SpeechTherapistDao()
 
-    suspend fun getSpeechTherapist() {
-        speechTherapistDao.getSpeechTherapist()
+    fun getSpeechTherapist(): Flow<List<SpeechTherapist>> {
+       return speechTherapistDao.getSpeechTherapist()
     }
 
-    suspend fun setSpeechTherapist(id: Int) {
+    fun setSpeechTherapist(id: Int) {
         speechTherapistDao.setSpeechTherapist(id)
     }
 
-    suspend fun deleteSpeechTherapist(id: Int) {
+    fun deleteSpeechTherapist(id: Int) {
         speechTherapistDao.deleteSpeechTherapist(id)
     }
 
-    suspend fun deleteAllSpeechTherapist() {
+    fun deleteAllSpeechTherapist() {
         speechTherapistDao.deleteAllSpeechTherapist()
     }
 
-    suspend fun insertSpeechTherapist(speechTherapist: SpeechTherapist) {
+    fun insertSpeechTherapist(speechTherapist: SpeechTherapist) {
         speechTherapistDao.insertSpeechTherapist(speechTherapist)
     }
 }

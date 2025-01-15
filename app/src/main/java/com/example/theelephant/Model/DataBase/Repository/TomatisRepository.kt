@@ -2,27 +2,28 @@ package com.example.theelephant.Model.DataBase.Repository
 
 import com.example.theelephant.Model.DataBase.DataBase
 import com.example.theelephant.Model.DataBase.Entities.Tomatis
+import kotlinx.coroutines.flow.Flow
 
-class TomatisRepository(private val dataBase: DataBase) {
+class TomatisRepository(dataBase: DataBase) {
     private val tomatisDao = dataBase.TomatisDao()
 
-    suspend fun getTomatis() {
-        tomatisDao.getTomatis()
+    fun getTomatis(): Flow<List<Tomatis>> {
+        return tomatisDao.getTomatis()
     }
 
-    suspend fun setTomatis(id: Int) {
+    fun setTomatis(id: Int) {
         tomatisDao.setTomatis(id)
     }
 
-    suspend fun deleteTomatis(id: Int) {
+    fun deleteTomatis(id: Int) {
         tomatisDao.deleteTomatis(id)
     }
 
-    suspend fun deleteAllTomatis() {
+    fun deleteAllTomatis() {
         tomatisDao.deleteAllTomatis()
     }
 
-    suspend fun insertTomatis(tomatis: Tomatis) {
+    fun insertTomatis(tomatis: Tomatis) {
         tomatisDao.insertTomatis(tomatis)
     }
 }

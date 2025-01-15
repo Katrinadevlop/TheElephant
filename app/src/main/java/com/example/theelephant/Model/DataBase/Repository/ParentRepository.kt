@@ -2,27 +2,28 @@ package com.example.theelephant.Model.DataBase.Repository
 
 import com.example.theelephant.Model.DataBase.DataBase
 import com.example.theelephant.Model.DataBase.Entities.Parent
+import kotlinx.coroutines.flow.Flow
 
-class ParentRepository(private val dataBase: DataBase) {
+class ParentRepository(dataBase: DataBase) {
     private val parentDao = dataBase.ParentDao()
 
-    suspend fun getParent() {
-        parentDao.getParent()
+    fun getParent(): Flow<List<Parent>> {
+        return parentDao.getParent()
     }
 
-    suspend fun setParent(id: Int) {
+    fun setParent(id: Int) {
         parentDao.setParent(id)
     }
 
-    suspend fun deleteParent(id: Int) {
+    fun deleteParent(id: Int) {
         parentDao.deleteParent(id)
     }
 
-    suspend fun deleteAllParent() {
+    fun deleteAllParent() {
         parentDao.deleteAllParent()
     }
 
-    suspend fun insertParent(parent: Parent) {
+    fun insertParent(parent: Parent) {
         parentDao.insertParent(parent)
     }
 }

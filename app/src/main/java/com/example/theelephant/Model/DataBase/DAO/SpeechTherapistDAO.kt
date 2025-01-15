@@ -5,21 +5,22 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.theelephant.Model.DataBase.Entities.SpeechTherapist
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SpeechTherapistDAO {
     @Query("SELECT * FROM speech_therapist")
-    suspend fun getSpeechTherapist()
+    fun getSpeechTherapist(): Flow<List<SpeechTherapist>>
 
     @Query("SELECT * FROM speech_therapist WHERE id = :id")
-    suspend fun setSpeechTherapist(id: Int): SpeechTherapist
+    fun setSpeechTherapist(id: Int): SpeechTherapist
 
     @Query("SELECT * FROM speech_therapist WHERE id = :id")
-    suspend fun deleteSpeechTherapist(id: Int)
+    fun deleteSpeechTherapist(id: Int)
 
     @Query("DELETE FROM speech_therapist")
-    suspend fun deleteAllSpeechTherapist()
+    fun deleteAllSpeechTherapist()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertSpeechTherapist(speechTherapist: SpeechTherapist)
+    fun insertSpeechTherapist(speechTherapist: SpeechTherapist)
 }
