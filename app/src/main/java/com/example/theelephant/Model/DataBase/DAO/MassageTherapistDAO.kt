@@ -15,7 +15,7 @@ interface MassageTherapistDAO {
     @Query("SELECT * FROM massage_therapist WHERE id = :id")
     fun setMassageTherapist(id: Int): MassageTherapist
 
-    @Query("SELECT * FROM massage_therapist WHERE id = :id")
+    @Query("DELETE FROM massage_therapist WHERE id = :id")
     fun deleteMassageTherapist(id: Int)
 
     @Query("DELETE FROM massage_therapist")

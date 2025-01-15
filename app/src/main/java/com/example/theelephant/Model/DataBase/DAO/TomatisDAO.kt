@@ -15,7 +15,7 @@ interface TomatisDAO {
     @Query("SELECT * FROM tomatis WHERE id = :id")
     fun setTomatis(id: Int): Tomatis
 
-    @Query("SELECT * FROM tomatis WHERE id = :id")
+    @Query("DELETE FROM tomatis WHERE id = :id")
     fun deleteTomatis(id: Int)
 
     @Query("DELETE FROM tomatis")

@@ -15,7 +15,7 @@ interface ParentDAO {
     @Query("SELECT * FROM parent WHERE id = :id")
     fun setParent(id: Int): Parent
 
-    @Query("SELECT * FROM parent WHERE id = :id")
+    @Query("DELETE FROM parent WHERE id = :id")
     fun deleteParent(id: Int)
 
     @Query("DELETE FROM parent")

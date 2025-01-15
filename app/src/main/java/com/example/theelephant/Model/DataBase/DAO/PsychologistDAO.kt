@@ -15,7 +15,7 @@ interface PsychologistDAO {
     @Query("SELECT * FROM psychologist WHERE id = :id")
     fun setPsychologist(id: Int): Psychologist
 
-    @Query("SELECT * FROM psychologist WHERE id = :id")
+    @Query("DELETE FROM psychologist WHERE id = :id")
     fun deletePsychologist(id: Int)
 
     @Query("DELETE FROM psychologist")

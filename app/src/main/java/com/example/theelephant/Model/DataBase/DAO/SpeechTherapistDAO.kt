@@ -15,7 +15,7 @@ interface SpeechTherapistDAO {
     @Query("SELECT * FROM speech_therapist WHERE id = :id")
     fun setSpeechTherapist(id: Int): SpeechTherapist
 
-    @Query("SELECT * FROM speech_therapist WHERE id = :id")
+    @Query("DELETE FROM speech_therapist WHERE id = :id")
     fun deleteSpeechTherapist(id: Int)
 
     @Query("DELETE FROM speech_therapist")

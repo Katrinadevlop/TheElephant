@@ -15,7 +15,7 @@ interface ТeurodefectologistDAO {
     @Query("SELECT * FROM teurodefectologist WHERE id = :id")
     fun setТeurodefectologist(id: Int): Тeurodefectologist
 
-    @Query("SELECT * FROM teurodefectologist WHERE id = :id")
+    @Query("DELETE FROM teurodefectologist WHERE id = :id")
     fun deleteТeurodefectologist(id: Int)
 
     @Query("DELETE FROM teurodefectologist")

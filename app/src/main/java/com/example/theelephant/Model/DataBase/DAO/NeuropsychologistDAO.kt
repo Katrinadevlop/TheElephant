@@ -15,7 +15,7 @@ interface NeuropsychologistDAO {
     @Query("SELECT * FROM neuropsychologist WHERE id = :id")
     fun setNeuropsychologist(id: Int): Neuropsychologist
 
-    @Query("SELECT * FROM neuropsychologist WHERE id = :id")
+    @Query("DELETE FROM neuropsychologist WHERE id = :id")
     fun deleteNeuropsychologist(id: Int)
 
     @Query("DELETE FROM neuropsychologist")
