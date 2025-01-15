@@ -16,4 +16,6 @@
     <string name="change_password">Изменить пароль</string>
     <string name="change_theme">Изменить тему</string>
     <string name="log_out_account">Выйти из аккаунта</string>
+    <string name="enter">Войти</string>
+    <string name="authorization">Авторизация</string>
 </resources>
