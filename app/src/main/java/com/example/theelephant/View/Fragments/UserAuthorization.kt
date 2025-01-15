@@ -5,13 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.theelephant.R
+import com.example.theelephant.databinding.FragmentUserAuthorizationBinding
+import com.example.theelephant.databinding.FragmentUserRegistrationBinding
 
 class UserAuthorization : Fragment() {
+
+    private lateinit var binding: FragmentUserAuthorizationBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        return inflater.inflate(R.layout.fragment_user_authorization, container, false)
+    ): View {
+        binding = FragmentUserAuthorizationBinding.inflate(inflater, container, false)
+        return binding.root
     }
 }

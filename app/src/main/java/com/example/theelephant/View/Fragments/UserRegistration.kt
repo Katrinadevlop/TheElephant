@@ -16,7 +16,7 @@ class UserRegistration : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentUserRegistrationBinding.inflate(inflater, container, false)
         return binding.root
     }
