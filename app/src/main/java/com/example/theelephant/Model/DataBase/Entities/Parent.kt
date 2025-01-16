@@ -4,11 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "parent")
-data class Parent(
-    @PrimaryKey val id: Int,
+data class ParentEntity(
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val name: String,
     val surname: String,
     val phone: String,
     val password: String,
-    val role: String,
 )

@@ -3,9 +3,9 @@ package com.example.theelephant.Model.DataBase.Entities
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "tomatis")
-data class Tomatis(
-    @PrimaryKey val id: Int,
+@Entity(tableName = "specialist")
+data class SpecialistEntity (
+    @PrimaryKey(autoGenerate = true) var id:Int = 0,
     val name: String,
     val surname: String,
     val phone: String,

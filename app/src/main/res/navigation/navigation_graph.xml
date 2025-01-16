@@ -6,25 +6,25 @@
     app:startDestination="@id/userRegistration">
 
     <fragment
-        android:id="@+id/navigationButton"
-        android:name="com.example.theelephant.View.Fragments.NavigationButton"
-        android:label="fragment_navigation_button"
-        tools:layout="@layout/fragment_navigation_button" />
-    <fragment
         android:id="@+id/userRegistration"
         android:name="com.example.theelephant.View.Fragments.UserRegistration"
         android:label="fragment_user_registration"
         tools:layout="@layout/fragment_user_registration" >
         <action
-            android:id="@+id/action_userRegistration_to_navigationButton"
-            app:destination="@id/navigationButton" />
-        <action
             android:id="@+id/action_userRegistration_to_userAuthorization"
             app:destination="@id/userAuthorization" />
+        <action
+            android:id="@+id/action_userRegistration_to_navigationButton2"
+            app:destination="@id/navigationButton2" />
     </fragment>
     <fragment
         android:id="@+id/userAuthorization"
         android:name="com.example.theelephant.View.Fragments.UserAuthorization"
         android:label="fragment_user_authorization"
         tools:layout="@layout/fragment_user_authorization" />
+    <fragment
+        android:id="@+id/navigationButton2"
+        android:name="com.example.theelephant.View.Fragments.NavigationButton"
+        android:label="fragment_navigation_button"
+        tools:layout="@layout/fragment_navigation_button" />
 </navigation>
