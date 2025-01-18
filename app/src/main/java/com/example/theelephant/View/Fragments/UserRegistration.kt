@@ -35,33 +35,7 @@ class UserRegistration : Fragment() {
         val parentRepository = ParentRepository(DataBase.getDataBase(requireContext()))
         userRegistrationViewModel = UserRegistrationViewModel(parentRepository)
 
-        var isPassowrdVisible = false
-        binding.imageEyePassword.setOnClickListener {
-            if (isPassowrdVisible) {
-                binding.editTextPassword.transformationMethod =
-                    PasswordTransformationMethod.getInstance()
-                binding.imageEyePassword.setImageResource(R.drawable.ic_eye_close)
-            } else {
-                binding.editTextPassword.transformationMethod =
-                    HideReturnsTransformationMethod.getInstance()
-                binding.imageEyePassword.setImageResource(R.drawable.ic_eye_open)
-            }
-            isPassowrdVisible = !isPassowrdVisible
-        }
-
-        var isPassowrdVisibleRepeat = false
-        binding.imageEyePasswordRepeat.setOnClickListener {
-            if (isPassowrdVisibleRepeat) {
-                binding.editTextPasswordRepeat.transformationMethod =
-                    PasswordTransformationMethod.getInstance()
-                binding.imageEyePasswordRepeat.setImageResource(R.drawable.ic_eye_close)
-            } else {
-                binding.editTextPasswordRepeat.transformationMethod =
-                    HideReturnsTransformationMethod.getInstance()
-                binding.imageEyePasswordRepeat.setImageResource(R.drawable.ic_eye_open)
-            }
-            isPassowrdVisibleRepeat = !isPassowrdVisibleRepeat
-        }
+        visibleInvisileEye()
 
         binding.registrationButton.setOnClickListener {
             val name = binding.nameEditText.text.toString().trim().lowercase()
@@ -80,11 +54,30 @@ class UserRegistration : Fragment() {
                     Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
                 }
             )
-
         }
 
         binding.linkTextView.setOnClickListener {
             findNavController().navigate(R.id.userAuthorization)
+        }
+    }
+
+    fun visibleInvisileEye(){
+        var isPassowrdVisible = false
+        binding.imageEyePassword.setOnClickListener {
+            if (isPassowrdVisible) {
+                binding.editTextPassword.transformationMethod =
+                    PasswordTransformationMethod.getInstance()
+                binding.editTextPasswordRepeat.transformationMethod =
+                    PasswordTransformationMethod.getInstance()
+                binding.imageEyePassword.setImageResource(R.drawable.ic_eye_close)
+            } else {
+                binding.editTextPassword.transformationMethod =
+                    HideReturnsTransformationMethod.getInstance()
+                binding.editTextPasswordRepeat.transformationMethod =
+                    HideReturnsTransformationMethod.getInstance()
+                binding.imageEyePassword.setImageResource(R.drawable.ic_eye_open)
+            }
+            isPassowrdVisible = !isPassowrdVisible
         }
     }
 }
