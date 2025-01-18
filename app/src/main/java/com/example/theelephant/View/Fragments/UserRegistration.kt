@@ -11,15 +11,15 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.theelephant.Model.DataBase.DataBase
 import com.example.theelephant.Model.DataBase.Repository.ParentRepository
-import com.example.theelephant.Model.Specialist
+import com.example.theelephant.Model.Parent
 import com.example.theelephant.R
-import com.example.theelephant.ViewModel.ParentViewModel
+import com.example.theelephant.ViewModel.UserRegistrationViewModel
 import com.example.theelephant.databinding.FragmentUserRegistrationBinding
 
 class UserRegistration : Fragment() {
 
     private lateinit var binding: FragmentUserRegistrationBinding
-    private lateinit var parentViewModel: ParentViewModel
+    private lateinit var userRegistrationViewModel: UserRegistrationViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,58 +33,7 @@ class UserRegistration : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val parentRepository = ParentRepository(DataBase.getDataBase(requireContext()))
-        parentViewModel = ParentViewModel(parentRepository)
-
-        val specialists = listOf(
-            Specialist(
-                name = "екатерина",
-                surname = "колосова",
-                phone = "111",
-                password = "htwwye3",
-                role = Specialist.Role.PSYCHOLOGIST,
-                specialization = "Детский психолог"
-            ),
-            Specialist(
-                name = "Марина",
-                surname = "Иванова",
-                phone = "79876543210",
-                password = "speech2023",
-                role = Specialist.Role.SPEECH_THERAPIST,
-                specialization = "Коррекция речи"
-            ),
-            Specialist(
-                name = "Сергей",
-                surname = "Петров",
-                phone = "79999999999",
-                password = "neuro@123",
-                role = Specialist.Role.NEUROPSYCHOLOGIST,
-                specialization = "Нейропсихология"
-            ),
-            Specialist(
-                name = "Алена",
-                surname = "Сидорова",
-                phone = "79881112233",
-                password = "defect@456",
-                role = Specialist.Role.ТEURODEFECTOLOGIST,
-                specialization = "Дефектология"
-            ),
-            Specialist(
-                name = "Олег",
-                surname = "Григорьев",
-                phone = "79888884444",
-                password = "tomatis@789",
-                role = Specialist.Role.TOMATIS,
-                specialization = "Метод Томатис"
-            ),
-            Specialist(
-                name = "Алексей",
-                surname = "Кузнецов",
-                phone = "79771234567",
-                password = "massage@2023",
-                role = Specialist.Role.MASSEUR,
-                specialization = "Детский массаж"
-            )
-        )
+        userRegistrationViewModel = UserRegistrationViewModel(parentRepository)
 
         var isPassowrdVisible = false
         binding.imageEyePassword.setOnClickListener {
@@ -117,26 +66,21 @@ class UserRegistration : Fragment() {
         binding.registrationButton.setOnClickListener {
             val name = binding.nameEditText.text.toString().trim().lowercase()
             val surname = binding.surnameEditText.text.toString().trim().lowercase()
-            val phone = binding.editTextPhone.text.toString().trim().lowercase()
-            val password = binding.editTextPassword.text.toString().trim().lowercase()
-            val passwordRepeat = binding.editTextPasswordRepeat.text.toString().trim().lowercase()
+            val phone = binding.editTextPhone.text.toString().trim()
+            val password = binding.editTextPassword.text.toString().trim()
+            val passwordRepeat = binding.editTextPasswordRepeat.text.toString().trim()
 
-            if (name.isNotEmpty() && surname.isNotEmpty() && phone.isNotEmpty() && password.isNotEmpty() && passwordRepeat.isNotEmpty()) {
-                if (password == passwordRepeat) {
-                    val findSpecialist =
-                        specialists.find { it.name == name && it.surname == surname && it.phone == phone }
-                    if (findSpecialist == null) {
-                        parentViewModel.saveParent(name, surname, phone, password)
-                        findNavController().navigate(R.id.navigationButton2)
-                    } else Toast.makeText(
-                        requireContext(),
-                        "Специалист уже зарегистрирован",
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else Toast.makeText(requireContext(), "Пароли не совпадают", Toast.LENGTH_LONG)
-                    .show()
-            } else Toast.makeText(requireContext(), "Не все поля заполнены", Toast.LENGTH_LONG)
-                .show()
+            userRegistrationViewModel.registerParent(
+                parent = Parent(name, surname, phone, password),
+                passwordRepeat = passwordRepeat,
+                onSuccess = {
+                    findNavController().navigate(R.id.navigationButton2)
+                },
+                onError = { errorMessage ->
+                    Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+                }
+            )
+
         }
 
         binding.linkTextView.setOnClickListener {

@@ -2,6 +2,7 @@ package com.example.theelephant.Model.DataBase.Repository
 
 import com.example.theelephant.Model.DataBase.DataBase
 import com.example.theelephant.Model.DataBase.Entities.ParentEntity
+import com.example.theelephant.Model.Parent
 import kotlinx.coroutines.flow.Flow
 
 class ParentRepository(dataBase: DataBase) {
