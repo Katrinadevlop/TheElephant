@@ -15,16 +15,44 @@
             app:destination="@id/userAuthorization" />
         <action
             android:id="@+id/action_userRegistration_to_navigationButton2"
-            app:destination="@id/navigationButton2" />
+            app:destination="@id/navigation_graph_2" />
     </fragment>
     <fragment
         android:id="@+id/userAuthorization"
         android:name="com.example.theelephant.View.Fragments.UserAuthorization"
         android:label="fragment_user_authorization"
         tools:layout="@layout/fragment_user_authorization" />
-    <fragment
-        android:id="@+id/navigationButton2"
-        android:name="com.example.theelephant.View.Fragments.NavigationButton"
-        android:label="fragment_navigation_button"
-        tools:layout="@layout/fragment_navigation_button" />
+    <navigation android:id="@+id/navigation_graph_2"
+        app:startDestination="@id/navigationButton2">
+        <fragment
+            android:id="@+id/navigationButton2"
+            android:name="com.example.theelephant.View.Fragments.NavigationButton"
+            android:label="fragment_navigation_button"
+            tools:layout="@layout/fragment_navigation_button">
+            <action
+                android:id="@+id/action_navigationButton2_to_calendarRecording"
+                app:destination="@id/calendarRecording" />
+            <action
+                android:id="@+id/action_navigationButton2_to_personalAccount"
+                app:destination="@id/personalAccount" />
+        </fragment>
+        <fragment
+            android:id="@+id/calendarRecording"
+            android:name="com.example.theelephant.View.Fragments.CalendarRecording"
+            android:label="fragment_calendar_recording"
+            tools:layout="@layout/fragment_calendar_recording" >
+            <action
+                android:id="@+id/action_calendarRecording_to_navigationButton2"
+                app:destination="@id/navigationButton2" />
+        </fragment>
+        <fragment
+            android:id="@+id/personalAccount"
+            android:name="com.example.theelephant.View.Fragments.PersonalAccount"
+            android:label="fragment_personal_account"
+            tools:layout="@layout/fragment_personal_account" >
+            <action
+                android:id="@+id/action_personalAccount_to_navigationButton2"
+                app:destination="@id/navigationButton2" />
+        </fragment>
+    </navigation>
 </navigation>

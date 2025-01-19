@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.example.theelephant.R
 import com.example.theelephant.databinding.FragmentNavigationButtonBinding
 
@@ -24,17 +27,20 @@ class NavigationButton : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            val selectedFragment: Fragment = when (item.itemId) {
-                R.id.calendarButtonMenu -> CalendarRecording()
-                R.id.profileButtonMenu -> PersonalAccount()
-                else -> return@setOnNavigationItemSelectedListener false
-            }
+            when (item.itemId) {
+                R.id.calendarButtonMenu -> {
+                    binding.frameLayout.findNavController().navigate(R.id.calendarRecording)
+                    //findNavController().navigate(R.id.calendarRecording)
+                    true
+                }
 
-            childFragmentManager
-                .beginTransaction()
-                .replace(R.id.frameLayout, selectedFragment)
-                .commit()
-            true
+                R.id.profileButtonMenu -> {
+                    findNavController().navigate(R.id.personalAccount)
+                    true
+                }
+
+                else -> false
+            }
         }
     }
 }

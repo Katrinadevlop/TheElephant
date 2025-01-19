@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.theelephant.Model.DataBase.DataBase
 import com.example.theelephant.Model.DataBase.Repository.ParentRepository
@@ -48,7 +49,8 @@ class UserRegistration : Fragment() {
                 parent = Parent(name, surname, phone, password),
                 passwordRepeat = passwordRepeat,
                 onSuccess = {
-                    findNavController().navigate(R.id.navigationButton2)
+                    findNavController().navigate(R.id.navigation_graph_2)
+                    findNavController().popBackStack(R.id.userRegistration, true)
                 },
                 onError = { errorMessage ->
                     Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
