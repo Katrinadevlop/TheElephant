@@ -26,7 +26,7 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <!-- Стиль для обычного TextView информация о пользователе -->
+    <!-- Стиль для TextView информация о пользователе -->
     <style name="NormalText" parent="wrap_contents">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/black</item>
@@ -39,11 +39,24 @@
         <item name="android:textColor">@color/blue</item>
     </style>
 
-    <!-- Стиль для обычного TextView для настроек приложения -->
+    <!-- Стиль для TextView для настроек приложения -->
     <style name="MenuTextView" parent="wrap_contents">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:padding">8dp</item>
     </style>
 
+    <!-- Стиль для ViewLine -->
+    <style name="ViewLine">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:background">@color/darker_gray</item>
+    </style>
+
+    <!-- Стиль для TextViewCalendar -->
+    <style name="TextViewCalendar" parent="wrap_contents">
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:padding">15dp</item>
+    </style>
 </resources>

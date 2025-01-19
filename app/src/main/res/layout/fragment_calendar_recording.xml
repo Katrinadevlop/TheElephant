@@ -19,13 +19,125 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView">
+        app:layout_constraintTop_toBottomOf="@+id/calendarView"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical">
+
+            <View
+                android:layout_width = "wrap_content"
+                android:layout_height = "1dp"
+                android:background = "@color/darker_gray"/>
+
+            <TextView
+                style="@style/TextViewCalendar"
+                android:layout_marginStart="10dp"
+                android:text="@string/_8_00" />
+
+            <View
+               style="@style/ViewLine"/>
+
+            <TextView
+                style="@style/TextViewCalendar"
+                android:layout_marginStart="10dp"
+                android:text="@string/_9_00" />
+
+            <View
+                style="@style/ViewLine"/>
+
+            <TextView
+                style="@style/TextViewCalendar"
+                android:layout_marginStart="10dp"
+                android:text="@string/_10_00" />
+
+            <View
+                style="@style/ViewLine"/>
+
+            <TextView
+                style="@style/TextViewCalendar"
+                android:layout_marginStart="10dp"
+                android:text="@string/_11_00" />
+
+            <View
+                style="@style/ViewLine"/>
+
+            <TextView
+                style="@style/TextViewCalendar"
+                android:layout_marginStart="10dp"
+                android:text="@string/_12_00" />
+
+            <View
+                style="@style/ViewLine"/>
+
+            <TextView
+                style="@style/TextViewCalendar"
+                android:layout_marginStart="10dp"
+                android:text="@string/_13_00" />
+
+            <View
+                style="@style/ViewLine"/>
+
+            <TextView
+                style="@style/TextViewCalendar"
+                android:layout_marginStart="10dp"
+                android:text="@string/_14_00" />
+
+            <View
+                style="@style/ViewLine"/>
+
+            <TextView
+                style="@style/TextViewCalendar"
+                android:layout_marginStart="10dp"
+                android:text="@string/_15_00" />
+
+            <View
+                style="@style/ViewLine"/>
+
+            <TextView
+                style="@style/TextViewCalendar"
+                android:layout_marginStart="10dp"
+                android:text="@string/_16_00" />
+
+            <View
+                style="@style/ViewLine"/>
+
+            <TextView
+                style="@style/TextViewCalendar"
+                android:layout_marginStart="10dp"
+                android:text="@string/_17_00" />
+
+            <View
+                style="@style/ViewLine"/>
+
+            <TextView
+                style="@style/TextViewCalendar"
+                android:layout_marginStart="10dp"
+                android:text="@string/_18_00" />
+
+            <View
+                style="@style/ViewLine"/>
+
+            <TextView
+                style="@style/TextViewCalendar"
+                android:layout_marginStart="10dp"
+                android:text="@string/_19_00" />
+
+            <View
+                style="@style/ViewLine"/>
+
+            <TextView
+                style="@style/TextViewCalendar"
+                android:layout_marginStart="10dp"
+                android:text="@string/_20_00" />
+
+            <View
+                style="@style/ViewLine"/>
+        </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
