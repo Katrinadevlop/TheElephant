@@ -5,9 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
+import androidx.activity.addCallback
+import androidx.appcompat.app.AlertDialog
 import com.example.theelephant.R
 import com.example.theelephant.databinding.FragmentNavigationButtonBinding
 
@@ -26,21 +25,46 @@ class NavigationButton : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadFragment(CalendarRecording())
+
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.calendarButtonMenu -> {
-                    binding.frameLayout.findNavController().navigate(R.id.calendarRecording)
-                    //findNavController().navigate(R.id.calendarRecording)
+                    loadFragment(CalendarRecording())
                     true
                 }
 
                 R.id.profileButtonMenu -> {
-                    findNavController().navigate(R.id.personalAccount)
+                    loadFragment(PersonalAccount())
                     true
                 }
 
                 else -> false
             }
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            showExitDialog()
+        }
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        val transaction = childFragmentManager.beginTransaction()
+        transaction.replace(R.id.frameLayout, fragment)
+        transaction.commit()
+    }
+
+    private fun showExitDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setMessage("Выйти из приложения?")
+            .setCancelable(false)
+            .setPositiveButton("Да") { dialog, id ->
+                requireActivity().finish()
+            }
+            .setNegativeButton("Нет") { dialog, id ->
+                dialog.dismiss()
+            }
+        val alert = builder.create()
+        alert.show()
     }
 }
