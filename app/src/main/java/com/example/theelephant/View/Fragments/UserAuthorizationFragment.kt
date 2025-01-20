@@ -6,9 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.theelephant.databinding.FragmentUserAuthorizationBinding
-import com.example.theelephant.databinding.FragmentUserRegistrationBinding
 
-class UserAuthorization : Fragment() {
+class UserAuthorizationFragment : Fragment() {
 
     private lateinit var binding: FragmentUserAuthorizationBinding
 

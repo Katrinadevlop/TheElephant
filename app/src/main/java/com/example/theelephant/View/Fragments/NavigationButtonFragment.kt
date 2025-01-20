@@ -10,7 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import com.example.theelephant.R
 import com.example.theelephant.databinding.FragmentNavigationButtonBinding
 
-class NavigationButton : Fragment() {
+class NavigationButtonFragment : Fragment() {
 
     private lateinit var binding: FragmentNavigationButtonBinding
 
@@ -25,17 +25,17 @@ class NavigationButton : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        loadFragment(CalendarRecording())
+        loadFragment(CalendarRecordingFragment())
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.calendarButtonMenu -> {
-                    loadFragment(CalendarRecording())
+                    loadFragment(CalendarRecordingFragment())
                     true
                 }
 
                 R.id.profileButtonMenu -> {
-                    loadFragment(PersonalAccount())
+                    loadFragment(PersonalAccountFragment())
                     true
                 }
 

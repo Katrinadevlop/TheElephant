@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/userRegistration"
-        android:name="com.example.theelephant.View.Fragments.UserRegistration"
+        android:name="com.example.theelephant.View.Fragments.UserRegistrationFragment"
         android:label="fragment_user_registration"
         tools:layout="@layout/fragment_user_registration" >
         <action
@@ -19,14 +19,14 @@
     </fragment>
     <fragment
         android:id="@+id/userAuthorization"
-        android:name="com.example.theelephant.View.Fragments.UserAuthorization"
+        android:name="com.example.theelephant.View.Fragments.UserAuthorizationFragment"
         android:label="fragment_user_authorization"
         tools:layout="@layout/fragment_user_authorization" />
     <navigation android:id="@+id/navigation_graph_2"
         app:startDestination="@id/navigationButton2">
         <fragment
             android:id="@+id/navigationButton2"
-            android:name="com.example.theelephant.View.Fragments.NavigationButton"
+            android:name="com.example.theelephant.View.Fragments.NavigationButtonFragment"
             android:label="fragment_navigation_button"
             tools:layout="@layout/fragment_navigation_button"/>
     </navigation>

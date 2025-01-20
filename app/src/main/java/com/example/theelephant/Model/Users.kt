@@ -31,3 +31,4 @@ data class Specialist(
         MASSEUR
     }
 }
+//нужно ли разнести на классы

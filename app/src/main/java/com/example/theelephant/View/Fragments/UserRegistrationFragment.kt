@@ -16,7 +16,7 @@ import com.example.theelephant.R
 import com.example.theelephant.ViewModel.UserRegistrationViewModel
 import com.example.theelephant.databinding.FragmentUserRegistrationBinding
 
-class UserRegistration : Fragment() {
+class UserRegistrationFragment : Fragment() {
 
     private lateinit var binding: FragmentUserRegistrationBinding
     private lateinit var userRegistrationViewModel: UserRegistrationViewModel

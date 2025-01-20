@@ -5,18 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.theelephant.databinding.FragmentPersonalAccountBinding
-import com.example.theelephant.databinding.FragmentUserRegistrationBinding
+import com.example.theelephant.R
+import com.example.theelephant.databinding.FragmentCalendarRecordingBinding
+import com.example.theelephant.databinding.FragmentRecordListBinding
 
-class PersonalAccount : Fragment() {
+class RecordListFragment : Fragment() {
 
-    private lateinit var binding: FragmentPersonalAccountBinding
+    private lateinit var binding: FragmentRecordListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentPersonalAccountBinding.inflate(inflater, container, false)
+        binding = FragmentRecordListBinding.inflate(inflater, container, false)
         return binding.root
     }
 

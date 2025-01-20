@@ -5,17 +5,20 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.theelephant.Model.DataBase.DAO.ParentDAO
+import com.example.theelephant.Model.DataBase.DAO.ScheduleDAO
 import com.example.theelephant.Model.DataBase.DAO.SpecialistDAO
 import com.example.theelephant.Model.DataBase.Entities.ParentEntity
+import com.example.theelephant.Model.DataBase.Entities.ScheduleEntity
 import com.example.theelephant.Model.DataBase.Entities.SpecialistEntity
 
 @Database(
-    entities = [ParentEntity::class, SpecialistEntity::class],
+    entities = [ParentEntity::class, SpecialistEntity::class, ScheduleEntity::class],
     version = 1
 )
 abstract class DataBase : RoomDatabase() {
     abstract fun ParentDao(): ParentDAO
     abstract fun SpecialistDao(): SpecialistDAO
+    abstract fun ScheduleDao(): ScheduleDAO
 
     companion object {
         @Volatile
