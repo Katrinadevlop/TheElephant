@@ -8,9 +8,14 @@ import com.example.theelephant.Model.Parent
 import com.example.theelephant.Model.SpecialistProvider
 import kotlinx.coroutines.launch
 
-class UserRegistrationViewModel(private val parentRepository: ParentRepository): ViewModel() {
+class UserRegistrationViewModel(private val parentRepository: ParentRepository) : ViewModel() {
 
-    fun registerParent(parent:Parent, passwordRepeat:String, onSuccess: () -> Unit, onError: (String) -> Unit){
+    fun registerParent(
+        parent: Parent,
+        passwordRepeat: String,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit,
+    ) {
         val name = parent.name
         val surname = parent.surname
         val phone = parent.phone
@@ -18,7 +23,7 @@ class UserRegistrationViewModel(private val parentRepository: ParentRepository):
         val specialists = SpecialistProvider()
 
         if (name.isBlank() || surname.isBlank() || phone.isBlank() || password.isBlank() || passwordRepeat.isBlank()) {
-            onError( "Не все поля заполнены")
+            onError("Не все поля заполнены")
             return
         }
 
@@ -27,13 +32,14 @@ class UserRegistrationViewModel(private val parentRepository: ParentRepository):
             return
         }
 
-        val findSpecialist = specialists.getSpecialist().find { it.name == name && it.surname == surname && it.phone == phone }
+        val findSpecialist = specialists.getSpecialist()
+            .find { it.name == name && it.surname == surname && it.phone == phone }
         if (findSpecialist != null) {
             onError("Специалист уже зарегистрирован")
             return
         }
 
-        val parentEntity  = ParentEntity(
+        val parentEntity = ParentEntity(
             name = parent.name,
             surname = parent.surname,
             phone = parent.phone,

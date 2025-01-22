@@ -1,13 +1,19 @@
 package com.example.theelephant.View.Fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import com.example.theelephant.Model.DataBase.Repository.ScheduleRepository
+import com.example.theelephant.Model.Schedule
+import com.example.theelephant.Model.SpecialistProvider
 import com.example.theelephant.R
 import com.example.theelephant.databinding.FragmentCalendarRecordingBinding
+import org.jetbrains.annotations.Async
 
 class CalendarRecordingFragment : Fragment() {
 
@@ -24,8 +30,9 @@ class CalendarRecordingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var selectedDate = ""
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            val selectedDate = "$dayOfMonth/${month + 1}/$year"
+            selectedDate = "$dayOfMonth/${month + 1}/$year"
 
             val calendarRecordingFragment = CalendarRecordingFragment()
 
@@ -38,5 +45,37 @@ class CalendarRecordingFragment : Fragment() {
             transaction.replace(R.id.frameLayout, RecordListFragment())
             transaction.commit()
         }
+
+        val specialistExemplar = SpecialistProvider()
+        val specialist = specialistExemplar.getSpecialist().map {it.specialization}.toMutableList()
+        specialist.add(0, "Выберите специалиста")
+
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, specialist)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.specialistSpinner.adapter = adapter
+
+        var selectedSpecialist = ""
+        binding.specialistSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                selectedSpecialist = specialist[position]
+                Log.d("SpinnerSelection", "Выбран специалист: $selectedSpecialist")
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+
+        val id = specialistExemplar.getSpecialist().find{selectedSpecialist == it.specialization}
+        val specialistId = id
+
+
+        //TODO:доделать запись к специалисту
+        val schedule = Schedule(selectedDate, "9:00", specialistId)
+
+
     }
 }

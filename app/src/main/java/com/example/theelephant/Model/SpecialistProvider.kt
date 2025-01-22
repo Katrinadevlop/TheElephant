@@ -2,7 +2,7 @@ package com.example.theelephant.Model
 
 class SpecialistProvider {
     fun getSpecialist(): List<Specialist> {
-        return   listOf(
+        return listOf(
             Specialist(
                 name = "екатерина",
                 surname = "колосова",

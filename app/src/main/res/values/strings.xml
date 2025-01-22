@@ -29,5 +29,15 @@
     <string name="_17_00">17:00</string>
     <string name="_18_00">18:00</string>
     <string name="_19_00">19:00</string>
-    <string name="_20_00">20:00</string>
+    <string name="_9_30">09:30</string>
+    <string name="_10_30">10:30</string>
+    <string name="_11_30">11:30</string>
+    <string name="_12_30">12:30</string>
+    <string name="_13_30">13:30</string>
+    <string name="_14_30">14:30</string>
+    <string name="_15_30">15:30</string>
+    <string name="_16_30">16:30</string>
+    <string name="_17_30">17:30</string>
+    <string name="_18_30">18:30</string>
+    <string name="_19_30">19:30</string>
 </resources>
