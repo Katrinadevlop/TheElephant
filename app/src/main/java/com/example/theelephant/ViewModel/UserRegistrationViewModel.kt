@@ -45,7 +45,7 @@ class UserRegistrationViewModel(private val parentRepository: FireBase) : ViewMo
             }
 
             if (findParent != null) {
-                onError("Родитель уже зарегистрирован")
+                onError("Пользователь уже зарегистрирован")
                 return@getAllParent
             }
 

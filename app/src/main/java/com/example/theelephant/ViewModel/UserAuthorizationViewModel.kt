@@ -1,6 +1,5 @@
 package com.example.theelephant.ViewModel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.theelephant.Model.DataBase.FireBase
@@ -23,10 +22,10 @@ class UserAuthorizationViewModel(private val fireBase: FireBase) : ViewModel() {
 
                     if (parent != null)
                         onSuccess("Пользователь авторизован")
-                    else onError("Родитель не найден")
+                    else onError("Пользователь не найден")
                 }
             } catch (e: Exception) {
-                onError("Ошибка при проверке родителя: ${e.message}")
+                onError("Ошибка при проверке пользователя: ${e.message}")
             }
         }
     }

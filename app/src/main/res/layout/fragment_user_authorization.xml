@@ -30,16 +30,4 @@
         android:backgroundTint="@color/blue"
         android:text="Войти"/>
 
-    <Button
-        android:id="@+id/phoneSignInButton"
-        style="@style/ButtonStyle"
-        android:backgroundTint="@color/blue"
-        android:text="Войти по номеру телефона"/>
-
-    <Button
-        android:id="@+id/googleSignInButton"
-        style="@style/ButtonStyle"
-        android:backgroundTint="@color/blue"
-        android:text="Войти с помощью Google"/>
-
 </LinearLayout>

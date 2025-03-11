@@ -19,7 +19,6 @@ class UserRegistrationFragment : Fragment() {
 
     private lateinit var binding: FragmentUserRegistrationBinding
 
-    //при перевороте данные не сохранятся
     private val userRegistrationViewModel: UserRegistrationViewModel
         get() = UserRegistrationViewModel(FireBase())
 

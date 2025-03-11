@@ -56,12 +56,10 @@ class NavigationButtonFragment : Fragment() {
 
     private fun showExitDialog() {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setMessage("Выйти из приложения?")
-            .setCancelable(false)
+        builder.setMessage("Выйти из приложения?").setCancelable(false)
             .setPositiveButton("Да") { dialog, id ->
                 requireActivity().finish()
-            }
-            .setNegativeButton("Нет") { dialog, id ->
+            }.setNegativeButton("Нет") { dialog, id ->
                 dialog.dismiss()
             }
         val alert = builder.create()
