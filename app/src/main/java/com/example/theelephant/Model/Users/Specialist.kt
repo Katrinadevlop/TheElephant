@@ -1,18 +1,4 @@
-package com.example.theelephant.Model
-
-interface IUser {
-    val name: String
-    val surname: String
-    val phone: String
-    val password: String
-}
-
-data class Parent(
-    override val name: String,
-    override val surname: String,
-    override val phone: String,
-    override val password: String,
-) : IUser
+package com.example.theelephant.Model.Users
 
 data class Specialist(
     override val name: String,
@@ -31,4 +17,3 @@ data class Specialist(
         MASSEUR
     }
 }
-//нужно ли разнести на классы

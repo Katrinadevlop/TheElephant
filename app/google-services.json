@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "712775106421",
+    "firebase_url": "https://the-elephant-40f43-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "the-elephant-40f43",
+    "storage_bucket": "the-elephant-40f43.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:712775106421:android:9e82d8f2548f93caeb9d3c",
+        "android_client_info": {
+          "package_name": "com.example.theelephant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "712775106421-9e5i61eou8n4e0j06oj3645ov2rai8jg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1iPN5mLnTpTOpSedrZwvuH4ocafGq2wc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "712775106421-9e5i61eou8n4e0j06oj3645ov2rai8jg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -8,12 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.example.theelephant.Model.DataBase.Repository.ScheduleRepository
-import com.example.theelephant.Model.Schedule
-import com.example.theelephant.Model.SpecialistProvider
 import com.example.theelephant.R
 import com.example.theelephant.databinding.FragmentCalendarRecordingBinding
-import org.jetbrains.annotations.Async
 
 class CalendarRecordingFragment : Fragment() {
 
@@ -46,13 +42,14 @@ class CalendarRecordingFragment : Fragment() {
             transaction.commit()
         }
 
-        val specialistExemplar = SpecialistProvider()
+       /* val specialistExemplar = SpecialistProvider()
         val specialist = specialistExemplar.getSpecialist().map {it.specialization}.toMutableList()
-        specialist.add(0, "Выберите специалиста")
+        specialist.add(0, "Выберите специалиста")*/
 
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, specialist)
+     /*   val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, specialist)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.specialistSpinner.adapter = adapter
+        binding.specialistSpinner.adapter = adapter*/
+/*
 
         var selectedSpecialist = ""
         binding.specialistSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -71,10 +68,11 @@ class CalendarRecordingFragment : Fragment() {
 
         val id = specialistExemplar.getSpecialist().find{selectedSpecialist == it.specialization}
         val specialistId = id
+*/
 
 
         //TODO:доделать запись к специалисту
-        val schedule = Schedule(selectedDate, "9:00", specialistId)
+        //val schedule = Schedule(selectedDate, "9:00", specialistId)
 
 
     }

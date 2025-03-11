@@ -43,6 +43,11 @@
             style="@style/NormalText"
             android:text="@string/phone" />
 
+        <TextView
+            android:id="@+id/remainingClasses"
+            style="@style/NormalText"
+            android:text="@string/remaining_classes" />
+
     </LinearLayout>
 
     <LinearLayout

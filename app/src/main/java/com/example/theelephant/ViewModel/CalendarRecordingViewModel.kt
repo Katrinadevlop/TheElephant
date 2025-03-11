@@ -2,12 +2,10 @@ package com.example.theelephant.ViewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.theelephant.Model.DataBase.Entities.ScheduleEntity
-import com.example.theelephant.Model.DataBase.Repository.ScheduleRepository
 import com.example.theelephant.Model.Schedule
 import kotlinx.coroutines.launch
 
-class CalendarRecordingViewModel(private val scheduleRepository: ScheduleRepository) : ViewModel() {
+class CalendarRecordingViewModel() : ViewModel() {//private val scheduleRepository: ScheduleRepository
 
     fun saveSchedule(schedule: Schedule, onSuccess: () -> Unit, onError: (String) -> Unit) {
         val date = schedule.date
@@ -19,19 +17,19 @@ class CalendarRecordingViewModel(private val scheduleRepository: ScheduleReposit
             return onError("Выберите все данные корректно")
         }
 
-        val scheduleEntity = ScheduleEntity(
+       /* val scheduleEntity = ScheduleEntity(
             date = schedule.date,
             time = schedule.time,
             specialistId = schedule.specialistId
         )
-
+*/
         viewModelScope.launch {
-            try {
+           /* try {
                 scheduleRepository.insertSchedule(scheduleEntity)
                 onSuccess()
             } catch (e: Exception) {
                 onError("Ошибка при сохранении данных: ${e.message}")
-            }
+            }*/
         }
     }
 }

@@ -1,16 +1,18 @@
 <resources>
     <string name="app_name">TheElephant</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_web_client_id" translatable="false">webClientId.app.googleusercontent.com</string>
     <string name="registrations">Регистрация</string>
     <string name="name">Имя</string>
     <string name="surname">Фамилия</string>
     <string name="password">Пароль</string>
     <string name="repeat_password">Повторите пароль</string>
     <string name="register">Зарегистрироваться</string>
+    <string name="google">Google</string>
     <string name="have_account">Уже есть аккаунт?</string>
     <string name="calendar">Календарь</string>
     <string name="profile">Профиль</string>
     <string name="phone">Телефон</string>
+    <string name="remaining_classes">Осталось занятий</string>
     <string name="edit_profile">Редактировать профиль</string>
     <string name="change_password">Изменить пароль</string>
     <string name="change_theme">Изменить тему</string>

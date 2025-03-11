@@ -9,9 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.example.theelephant.Model.DataBase.DataBase
-import com.example.theelephant.Model.DataBase.Repository.ParentRepository
-import com.example.theelephant.Model.Parent
+import com.example.theelephant.Model.DataBase.FireBase
+import com.example.theelephant.Model.Users.Parent
 import com.example.theelephant.R
 import com.example.theelephant.ViewModel.UserRegistrationViewModel
 import com.example.theelephant.databinding.FragmentUserRegistrationBinding
@@ -19,7 +18,10 @@ import com.example.theelephant.databinding.FragmentUserRegistrationBinding
 class UserRegistrationFragment : Fragment() {
 
     private lateinit var binding: FragmentUserRegistrationBinding
-    private lateinit var userRegistrationViewModel: UserRegistrationViewModel
+
+    //при перевороте данные не сохранятся
+    private val userRegistrationViewModel: UserRegistrationViewModel
+        get() = UserRegistrationViewModel(FireBase())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,9 +33,6 @@ class UserRegistrationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val parentRepository = ParentRepository(DataBase.getDataBase(requireContext()))
-        userRegistrationViewModel = UserRegistrationViewModel(parentRepository)
 
         visibleInvisileEye()
 
@@ -47,7 +46,8 @@ class UserRegistrationFragment : Fragment() {
             userRegistrationViewModel.registerParent(
                 parent = Parent(name, surname, phone, password),
                 passwordRepeat = passwordRepeat,
-                onSuccess = {
+                onSuccess = { str ->
+                    Toast.makeText(requireContext(), str, Toast.LENGTH_LONG).show()
                     findNavController().navigate(R.id.navigation_graph_2)
                     findNavController().popBackStack(R.id.userRegistration, true)
                 },
@@ -62,7 +62,7 @@ class UserRegistrationFragment : Fragment() {
         }
     }
 
-    fun visibleInvisileEye(){
+    fun visibleInvisileEye() {
         var isPassowrdVisible = false
         binding.imageEyePassword.setOnClickListener {
             if (isPassowrdVisible) {
