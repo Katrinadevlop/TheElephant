@@ -7,7 +7,7 @@ import com.example.theelephant.data.model.Parent
 import kotlinx.coroutines.launch
 
 class UserRegistrationViewModel(private val parentRepository: FireBase) : ViewModel() {
-
+//TODO перенести бизнес логику в папку domain создав классы
     fun isPhoneNumberValid(phone: String): Boolean {
         val regex = "^7\\s?\\d{3}\\s?\\d{3}\\d{2}\\d{2}\$".toRegex()
         return phone.matches(regex)

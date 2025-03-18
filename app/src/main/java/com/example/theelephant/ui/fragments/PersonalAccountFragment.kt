@@ -22,5 +22,7 @@ class PersonalAccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val userPhone = arguments?.getString("userPhone")
+        binding.phoneTextView.text = userPhone
     }
 }

@@ -36,6 +36,7 @@ class UserAuthorizationFragment : Fragment() {
             userAuthorizationViewModel.checkParent(
                 phone, password,
                 onSuccess = {
+                    val bundle = Bundle().apply { putString("userPhone", phone) }
                     findNavController().navigate(R.id.navigation_graph_2)
                     findNavController().popBackStack(R.id.calendarButtonMenu, true)
                 },
