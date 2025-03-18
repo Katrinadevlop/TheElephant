@@ -1,13 +1,10 @@
-package com.example.theelephant.View.Fragments
+package com.example.theelephant.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import com.example.theelephant.R
 import com.example.theelephant.databinding.FragmentCalendarRecordingBinding
 

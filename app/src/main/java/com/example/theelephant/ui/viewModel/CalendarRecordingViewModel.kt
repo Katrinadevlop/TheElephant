@@ -1,8 +1,8 @@
-package com.example.theelephant.ViewModel
+package com.example.theelephant.ui.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.theelephant.Model.Schedule
+import com.example.theelephant.data.model.Schedule
 import kotlinx.coroutines.launch
 
 class CalendarRecordingViewModel() : ViewModel() {//private val scheduleRepository: ScheduleRepository

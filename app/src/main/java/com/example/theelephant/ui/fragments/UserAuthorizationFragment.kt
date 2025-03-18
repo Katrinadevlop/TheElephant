@@ -1,4 +1,4 @@
-package com.example.theelephant.View.Fragments
+package com.example.theelephant.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.example.theelephant.Model.DataBase.FireBase
+import com.example.theelephant.data.dataBase.FireBase
 import com.example.theelephant.R
-import com.example.theelephant.ViewModel.UserAuthorizationViewModel
+import com.example.theelephant.ui.viewModel.UserAuthorizationViewModel
 import com.example.theelephant.databinding.FragmentUserAuthorizationBinding
 
 class UserAuthorizationFragment : Fragment() {

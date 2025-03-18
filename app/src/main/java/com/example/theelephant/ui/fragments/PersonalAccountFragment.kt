@@ -1,4 +1,4 @@
-package com.example.theelephant.View.Fragments
+package com.example.theelephant.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

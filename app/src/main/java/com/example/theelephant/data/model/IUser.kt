@@ -1,4 +1,4 @@
-package com.example.theelephant.Model.Users
+package com.example.theelephant.data.model
 
 interface IUser {
     val name: String

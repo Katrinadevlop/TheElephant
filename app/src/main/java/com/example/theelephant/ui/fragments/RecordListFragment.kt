@@ -1,12 +1,10 @@
-package com.example.theelephant.View.Fragments
+package com.example.theelephant.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.theelephant.R
-import com.example.theelephant.databinding.FragmentCalendarRecordingBinding
 import com.example.theelephant.databinding.FragmentRecordListBinding
 
 class RecordListFragment : Fragment() {

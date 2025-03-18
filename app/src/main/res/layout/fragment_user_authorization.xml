@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".View.Fragments.UserAuthorizationFragment">
+    tools:context=".ui.fragments.UserAuthorizationFragment">
 
     <TextView
         android:id="@+id/registrationTextView"

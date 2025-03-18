@@ -1,8 +1,8 @@
-package com.example.theelephant.ViewModel
+package com.example.theelephant.ui.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.theelephant.Model.DataBase.FireBase
+import com.example.theelephant.data.dataBase.FireBase
 import kotlinx.coroutines.launch
 
 class UserAuthorizationViewModel(private val fireBase: FireBase) : ViewModel() {

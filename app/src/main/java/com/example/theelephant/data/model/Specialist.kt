@@ -1,4 +1,4 @@
-package com.example.theelephant.Model.Users
+package com.example.theelephant.data.model
 
 data class Specialist(
     override val name: String,

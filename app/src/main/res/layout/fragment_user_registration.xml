@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".View.Fragments.UserRegistrationFragment">
+    tools:context=".ui.fragments.UserRegistrationFragment">
 
     <TextView
         android:id="@+id/registrationTextView"

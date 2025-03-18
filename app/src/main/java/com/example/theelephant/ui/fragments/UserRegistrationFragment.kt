@@ -1,4 +1,4 @@
-package com.example.theelephant.View.Fragments
+package com.example.theelephant.ui.fragments
 
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
@@ -9,10 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.example.theelephant.Model.DataBase.FireBase
-import com.example.theelephant.Model.Users.Parent
+import com.example.theelephant.data.dataBase.FireBase
+import com.example.theelephant.data.model.Parent
 import com.example.theelephant.R
-import com.example.theelephant.ViewModel.UserRegistrationViewModel
+import com.example.theelephant.ui.viewModel.UserRegistrationViewModel
 import com.example.theelephant.databinding.FragmentUserRegistrationBinding
 
 class UserRegistrationFragment : Fragment() {

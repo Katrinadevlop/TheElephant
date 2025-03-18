@@ -1,8 +1,8 @@
-package com.example.theelephant.Model.DataBase
+package com.example.theelephant.data.dataBase
 
 import android.util.Log
-import com.example.theelephant.Model.Users.Parent
-import com.example.theelephant.Model.Users.Specialist
+import com.example.theelephant.data.model.Parent
+import com.example.theelephant.data.model.Specialist
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -27,9 +27,9 @@ class FireBase {
 
         refParents.child(parentId).setValue(parentData).addOnCompleteListener { task ->
             if (task.isSuccessful)
-                Log.e("error","Родитель успешно зарегистрирован")
+                Log.e("error", "Родитель успешно зарегистрирован")
             else
-                Log.e("error","Ошибка регистрации: ${task.exception?.message}")
+                Log.e("error", "Ошибка регистрации: ${task.exception?.message}")
         }
     }
 
@@ -87,11 +87,11 @@ class FireBase {
                     listParents.add(parent)
                 }
             } else {
-                Log.e("error","Ошибка: родители не найдены")
+                Log.e("error", "Ошибка: родители не найдены")
             }
             onComplete(listParents)
         }.addOnFailureListener {
-            Log.e("error","Ошибка при получении данных: ${it.message}")
+            Log.e("error", "Ошибка при получении данных: ${it.message}")
             onComplete(emptyList())
         }
     }
@@ -111,9 +111,9 @@ class FireBase {
 
         refSpecialists.child(specialistId).setValue(specialistData).addOnCompleteListener { task ->
             if (task.isSuccessful)
-                Log.e("error","Специалист успешно зарегистрирован")
+                Log.e("error", "Специалист успешно зарегистрирован")
             else
-                Log.e("error","Ошибка регистрации: ${task.exception?.message}")
+                Log.e("error", "Ошибка регистрации: ${task.exception?.message}")
         }
     }
 
@@ -181,12 +181,12 @@ class FireBase {
                     listSpecialist.add(specialist)
                 }
             } else {
-                Log.e("error","Ошибка: специалисты не найдены")
+                Log.e("error", "Ошибка: специалисты не найдены")
             }
 
             onComplete(listSpecialist)
         }.addOnFailureListener {
-            Log.e("error","Ошибка при получении данных: ${it.message}")
+            Log.e("error", "Ошибка при получении данных: ${it.message}")
             onComplete(emptyList())
         }
     }
