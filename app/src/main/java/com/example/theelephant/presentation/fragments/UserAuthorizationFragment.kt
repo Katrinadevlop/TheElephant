@@ -1,4 +1,4 @@
-package com.example.theelephant.ui.fragments
+package com.example.theelephant.presentation.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,16 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.example.theelephant.data.dataBase.FireBase
 import com.example.theelephant.R
-import com.example.theelephant.ui.viewModel.UserAuthorizationViewModel
+import com.example.theelephant.data.repository.ParentRepository
+import com.example.theelephant.presentation.viewModel.UserAuthorizationViewModel
 import com.example.theelephant.databinding.FragmentUserAuthorizationBinding
 
 class UserAuthorizationFragment : Fragment() {
 
     private lateinit var binding: FragmentUserAuthorizationBinding
     private val userAuthorizationViewModel: UserAuthorizationViewModel
-        get() = UserAuthorizationViewModel(FireBase())
+        get() = UserAuthorizationViewModel(ParentRepository())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,7 +37,7 @@ class UserAuthorizationFragment : Fragment() {
                 phone, password,
                 onSuccess = {
                     val bundle = Bundle().apply { putString("userPhone", phone) }
-                    findNavController().navigate(R.id.navigation_graph_2)
+                    findNavController().navigate(R.id.navigation_graph_2, bundle)
                     findNavController().popBackStack(R.id.calendarButtonMenu, true)
                 },
                 onError = { errorMessage ->

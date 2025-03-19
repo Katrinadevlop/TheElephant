@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.PersonalAccountFragment">
+    tools:context=".presentation.fragments.PersonalAccountFragment">
 
     <ImageView
         android:id="@+id/imageView"
@@ -63,18 +63,22 @@
         app:layout_constraintVertical_bias="0.125">
 
         <TextView
+            android:id="@+id/editProfile"
             style="@style/MenuTextView"
             android:text="@string/edit_profile" />
 
         <TextView
+            android:id="@+id/editPassword"
             style="@style/MenuTextView"
             android:text="@string/change_password" />
 
         <TextView
+            android:id="@+id/editTheme"
             style="@style/MenuTextView"
             android:text="@string/change_theme" />
 
         <TextView
+            android:id="@+id/exitAccount"
             style="@style/MenuTextView"
             android:text="@string/log_out_account" />
     </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.theelephant.ui.fragments
+package com.example.theelephant.presentation.fragments
 
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
@@ -9,18 +9,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.example.theelephant.data.dataBase.FireBase
+import com.example.theelephant.data.repository.SpecialistRepository
 import com.example.theelephant.data.model.Parent
 import com.example.theelephant.R
-import com.example.theelephant.ui.viewModel.UserRegistrationViewModel
+import com.example.theelephant.data.repository.ParentRepository
+import com.example.theelephant.presentation.viewModel.UserRegistrationViewModel
 import com.example.theelephant.databinding.FragmentUserRegistrationBinding
+import com.example.theelephant.domain.UserRegistrationUseCase
 
 class UserRegistrationFragment : Fragment() {
 
     private lateinit var binding: FragmentUserRegistrationBinding
 
     private val userRegistrationViewModel: UserRegistrationViewModel
-        get() = UserRegistrationViewModel(FireBase())
+        get() = UserRegistrationViewModel(
+            UserRegistrationUseCase(
+                parentRepositoryInterfase = ParentRepository(),
+                specialistRepositoryInterface = SpecialistRepository()
+            )
+        )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

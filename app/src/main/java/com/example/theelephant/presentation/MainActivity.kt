@@ -1,4 +1,4 @@
-package com.example.theelephant.ui
+package com.example.theelephant.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
