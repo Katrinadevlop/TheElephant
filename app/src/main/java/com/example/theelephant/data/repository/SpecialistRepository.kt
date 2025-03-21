@@ -8,13 +8,14 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.coroutines.tasks.await
 
 private val database =
     FirebaseDatabase.getInstance("https://the-elephant-40f43-default-rtdb.europe-west1.firebasedatabase.app")
 private var refSpecialists = database.reference.child("specialist")
 
 class SpecialistRepository : SpecialistRepositoryInterface {
-    override fun saveSpecialist(specialist: Specialist) {
+    override suspend fun saveSpecialist(specialist: Specialist) {
         val specialistId = refSpecialists.push().key ?: return
 
         val specialistData = mapOf(
@@ -35,7 +36,7 @@ class SpecialistRepository : SpecialistRepositoryInterface {
         }
     }
 
-    override fun changeSpecialist(
+    override suspend fun changeSpecialist(
         specialist: Specialist,
         specialistId: String,
         onComplete: (Boolean) -> Unit,
@@ -60,7 +61,7 @@ class SpecialistRepository : SpecialistRepositoryInterface {
             }
     }
 
-    override fun getSpecialist(specialistId: String, onComplete: (Specialist?) -> Unit) {
+    override suspend fun getSpecialist(specialistId: String, onComplete: (Specialist?) -> Unit) {
         val refSpecialist = refSpecialists.child(specialistId)
 
         refSpecialist.get().addOnSuccessListener { snapshot ->
@@ -82,13 +83,12 @@ class SpecialistRepository : SpecialistRepositoryInterface {
         }
     }
 
-    override fun getAllSpecialist(onComplete: (List<Specialist>) -> Unit) {
-        refSpecialists.get().addOnSuccessListener { snapshot ->
-            val listSpecialist = mutableListOf<Specialist>()
-
-            if (snapshot.exists()) {
-                for (child in snapshot.children) {
-                    val specialist = Specialist(
+    override suspend fun getAllSpecialist(): List<Specialist> {
+        return try {
+            val snapshot = refSpecialists.get().await()
+            val listSpecialist = snapshot.children.mapNotNull { child ->
+                try {
+                    Specialist(
                         name = child.child("name").value as String,
                         surname = child.child("surname").value as String,
                         phone = child.child("phone").value as String,
@@ -96,20 +96,18 @@ class SpecialistRepository : SpecialistRepositoryInterface {
                         role = Specialist.Role.valueOf(child.child("role").value as String),
                         specialization = child.child("specialization").value as String
                     )
-                    listSpecialist.add(specialist)
+                } catch (e: Exception) {
+                    null
                 }
-            } else {
-                Log.e("error", "Ошибка: специалисты не найдены")
             }
-
-            onComplete(listSpecialist)
-        }.addOnFailureListener {
-            Log.e("error", "Ошибка при получении данных: ${it.message}")
-            onComplete(emptyList())
+            listSpecialist
+        } catch (e: Exception) {
+            Log.e("error", "Ошибка при получении данных: ${e.message}")
+            emptyList()
         }
     }
 
-    override fun getParentByPhone(phone: String, callback: (Parent?) -> Unit) {
+    override suspend fun getParentByPhone(phone: String, callback: (Parent?) -> Unit) {
         val refParent = FirebaseDatabase.getInstance().getReference("parents")
 
         refParent.orderByChild("phone").equalTo(phone)

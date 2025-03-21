@@ -29,5 +29,38 @@
             android:name="com.example.theelephant.presentation.fragments.NavigationButtonFragment"
             android:label="fragment_navigation_button"
             tools:layout="@layout/fragment_navigation_button"/>
+        <action
+            android:id="@+id/action_global_personalAccountFragment"
+            app:destination="@id/personalAccountFragment" />
     </navigation>
+    <fragment
+        android:id="@+id/personalAccountFragment"
+        android:name="com.example.theelephant.presentation.fragments.PersonalAccountFragment"
+        android:label="fragment_personal_account"
+        tools:layout="@layout/fragment_personal_account" >
+        <action
+            android:id="@+id/action_personalAccountFragment_to_editProfileBlankFragment"
+            app:destination="@id/editProfileBlankFragment" />
+        <action
+            android:id="@+id/action_personalAccountFragment_to_changePasswordBlankFragment"
+            app:destination="@id/changePasswordBlankFragment" />
+        <action
+            android:id="@+id/action_personalAccountFragment_to_changeThemeBlankFragment"
+            app:destination="@id/changeThemeBlankFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileBlankFragment"
+        android:name="com.example.theelephant.presentation.fragments.EditProfileBlankFragment"
+        android:label="fragment_edit_profile_blank"
+        tools:layout="@layout/fragment_edit_profile_blank" />
+    <fragment
+        android:id="@+id/changePasswordBlankFragment"
+        android:name="com.example.theelephant.presentation.fragments.ChangePasswordBlankFragment"
+        android:label="fragment_change_password_blank"
+        tools:layout="@layout/fragment_change_password_blank" />
+    <fragment
+        android:id="@+id/changeThemeBlankFragment"
+        android:name="com.example.theelephant.presentation.fragments.ChangeThemeBlankFragment"
+        android:label="fragment_change_theme_blank"
+        tools:layout="@layout/fragment_change_theme_blank" />
 </navigation>

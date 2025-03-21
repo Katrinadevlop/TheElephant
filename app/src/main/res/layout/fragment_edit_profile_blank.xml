@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.fragments.EditProfileBlankFragment">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="52dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="258dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.407"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/nameEditText"
+            style="@style/NormalText"
+            android:width="150dp"
+            android:height="40dp"
+            android:gravity="left"
+            android:hint="@string/name" />
+
+        <EditText
+            android:id="@+id/surnameEditText"
+            style="@style/NormalText"
+            android:width="150dp"
+            android:height="40dp"
+            android:gravity="left"
+            android:hint="@string/surname" />
+
+        <EditText
+            android:id="@+id/phoneEditText"
+            style="@style/NormalText"
+            android:width="150dp"
+            android:height="40dp"
+            android:gravity="left"
+            android:hint="@string/phone" />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/blue"
+            android:text="Сохранить" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

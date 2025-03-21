@@ -6,61 +6,80 @@
     android:layout_height="match_parent"
     tools:context=".presentation.fragments.PersonalAccountFragment">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="52dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.083"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="258dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.407"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/nameTextView"
-            style="@style/NormalText"
-            android:text="@string/name" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="52dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.083"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
 
-        <TextView
-            android:id="@+id/surnameTextView"
-            android:text="@string/surname"
-            style="@style/NormalText" />
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="258dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.407"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/phoneTextView"
-            style="@style/NormalText"
-            android:text="@string/phone" />
+            <TextView
+                android:id="@+id/nameTextView"
+                style="@style/NormalText"
+                android:width="150dp"
+                android:height="40dp"
+                android:gravity="left"
+                android:text="@string/name" />
 
-        <TextView
-            android:id="@+id/remainingClasses"
-            style="@style/NormalText"
-            android:text="@string/remaining_classes" />
+            <TextView
+                android:id="@+id/surnameTextView"
+                style="@style/NormalText"
+                android:width="150dp"
+                android:height="40dp"
+                android:gravity="left"
+                android:text="@string/surname" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/phoneTextView"
+                style="@style/NormalText"
+                android:width="150dp"
+                android:height="40dp"
+                android:gravity="left"
+                android:text="@string/phone" />
+
+            <TextView
+                android:id="@+id/remainingClasses"
+                style="@style/NormalText"
+                android:width="150dp"
+                android:height="40dp"
+                android:gravity="left"
+                android:text="@string/remaining_classes" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.125">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <TextView
             android:id="@+id/editProfile"

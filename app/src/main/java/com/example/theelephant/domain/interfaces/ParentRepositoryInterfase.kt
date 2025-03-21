@@ -3,13 +3,13 @@ package com.example.theelephant.domain.interfaces
 import com.example.theelephant.data.model.Parent
 
 interface ParentRepositoryInterfase {
-    fun saveParent(parent: Parent)
+    suspend fun saveParent(parent: Parent)
 
-    fun changeParent(parent: Parent, parentId: String, onComplete: (Boolean) -> Unit)
+    suspend fun updateParent(parent: Parent, parentId: String): Boolean
 
-    fun getParent(parentId: String, onComplete: (Parent?) -> Unit)
+    suspend fun getParent(parentId: String, onComplete: (Parent?) -> Unit)
 
-    fun getAllParent(onComplete: (List<Parent>) -> Unit)
+    suspend fun getAllParent(): List<Parent>
 
-    fun changePassword(changePassword:String)
+    suspend fun changePassword(changePassword:String)
 }

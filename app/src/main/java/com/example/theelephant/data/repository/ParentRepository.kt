@@ -4,13 +4,16 @@ import android.util.Log
 import com.example.theelephant.data.model.Parent
 import com.example.theelephant.domain.interfaces.ParentRepositoryInterfase
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.tasks.await
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 private val database =
     FirebaseDatabase.getInstance("https://the-elephant-40f43-default-rtdb.europe-west1.firebasedatabase.app")
 private val refParents = database.reference.child("parents")
 
 class ParentRepository : ParentRepositoryInterfase {
-    override fun saveParent(parent: Parent) {
+    override suspend fun saveParent(parent: Parent) {
         val parentId = refParents.push().key ?: return
 
         val parentData = mapOf(
@@ -29,27 +32,25 @@ class ParentRepository : ParentRepositoryInterfase {
         }
     }
 
-    override fun changeParent(parent: Parent, parentId: String, onComplete: (Boolean) -> Unit) {
-        val refParent = refParents.child(parentId)
+    override suspend fun updateParent(parent: Parent, parentId: String): Boolean {
+        return suspendCoroutine { continuation ->
+            val refParent = refParents.child(parentId)
 
-        val updatedParent = mapOf(
-            "name" to parent.name,
-            "surname" to parent.surname,
-            "phone" to parent.phone,
-            "password" to parent.password,
-        )
+            val updatedParent = mapOf(
+                "name" to parent.name,
+                "surname" to parent.surname,
+                "phone" to parent.phone,
+                "password" to parent.password,
+            )
 
-        refParent.updateChildren(updatedParent)
-            .addOnSuccessListener {
-                onComplete(true)
-            }
-            .addOnFailureListener {
-                onComplete(false)
-            }
+            refParent.updateChildren(updatedParent)
+                .addOnSuccessListener { continuation.resume(true) }
+                .addOnFailureListener { continuation.resume(false) }
+        }
     }
 
-    override fun getParent(parentId: String, onComplete: (Parent?) -> Unit) {
-        val refParent = refParents.child(parentId)
+    override suspend fun getParent(phone: String, onComplete: (Parent?) -> Unit) {
+        val refParent = refParents.child(phone)
 
         refParent.get().addOnSuccessListener { snapshot ->
             if (snapshot.exists()) {
@@ -68,31 +69,29 @@ class ParentRepository : ParentRepositoryInterfase {
         }
     }
 
-    override fun getAllParent(onComplete: (List<Parent>) -> Unit) {
-        refParents.get().addOnSuccessListener { snapshot ->
-            val listParents = mutableListOf<Parent>()
-
-            if (snapshot.exists()) {
-                for (parentSnapshot in snapshot.children) {
-                    val parent = Parent(
+    override suspend fun getAllParent(): List<Parent> {
+        return try {
+            val snapshot = refParents.get().await()
+            val listParents = snapshot.children.mapNotNull { parentSnapshot ->
+                try {
+                    Parent(
                         name = parentSnapshot.child("name").value as String,
                         surname = parentSnapshot.child("surname").value as String,
                         phone = parentSnapshot.child("phone").value as String,
-                        password = parentSnapshot.child("password").value as String,
+                        password = parentSnapshot.child("password").value as String
                     )
-                    listParents.add(parent)
+                } catch (e: Exception) {
+                    null
                 }
-            } else {
-                Log.e("error", "Ошибка: родители не найдены")
             }
-            onComplete(listParents)
-        }.addOnFailureListener {
-            Log.e("error", "Ошибка при получении данных: ${it.message}")
-            onComplete(emptyList())
+            listParents
+        } catch (e: Exception) {
+            Log.e("error", "Ошибка при получении данных: ${e.message}")
+            emptyList()
         }
     }
 
-    override fun changePassword(changePassword:String){
-
+    override suspend fun changePassword(changePassword:String){
+        TODO("Not yet implemented")
     }
 }

@@ -5,13 +5,13 @@ import com.example.theelephant.data.model.Specialist
 
 interface SpecialistRepositoryInterface {
 
-    fun saveSpecialist(specialist: Specialist)
+    suspend fun saveSpecialist(specialist: Specialist)
 
-    fun changeSpecialist(specialist: Specialist, specialistId: String, onComplete: (Boolean) -> Unit, )
+    suspend fun changeSpecialist(specialist: Specialist, specialistId: String, onComplete: (Boolean) -> Unit, )
 
-    fun getSpecialist(specialistId: String, onComplete: (Specialist?) -> Unit)
+    suspend fun getSpecialist(specialistId: String, onComplete: (Specialist?) -> Unit)
 
-    fun getAllSpecialist(onComplete: (List<Specialist>) -> Unit)
+    suspend fun getAllSpecialist(): List<Specialist>
 
-    fun getParentByPhone(phone: String, callback: (Parent?) -> Unit)
+    suspend fun getParentByPhone(phone: String, callback: (Parent?) -> Unit)
 }

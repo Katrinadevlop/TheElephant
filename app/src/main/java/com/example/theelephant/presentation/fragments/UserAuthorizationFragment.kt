@@ -11,12 +11,13 @@ import com.example.theelephant.R
 import com.example.theelephant.data.repository.ParentRepository
 import com.example.theelephant.presentation.viewModel.UserAuthorizationViewModel
 import com.example.theelephant.databinding.FragmentUserAuthorizationBinding
+import com.example.theelephant.domain.UserAuthorizationUseCase
 
 class UserAuthorizationFragment : Fragment() {
 
     private lateinit var binding: FragmentUserAuthorizationBinding
     private val userAuthorizationViewModel: UserAuthorizationViewModel
-        get() = UserAuthorizationViewModel(ParentRepository())
+        get() = UserAuthorizationViewModel(UserAuthorizationUseCase(parentRepositoryInterfase = ParentRepository()))
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +37,8 @@ class UserAuthorizationFragment : Fragment() {
             userAuthorizationViewModel.checkParent(
                 phone, password,
                 onSuccess = {
-                    val bundle = Bundle().apply { putString("userPhone", phone) }
-                    findNavController().navigate(R.id.navigation_graph_2, bundle)
+                    //TODO val bundle = Bundle().apply { putString("userPhone", phone) }
+                    findNavController().navigate(R.id.navigation_graph_2)//bundle
                     findNavController().popBackStack(R.id.calendarButtonMenu, true)
                 },
                 onError = { errorMessage ->

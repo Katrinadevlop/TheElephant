@@ -40,7 +40,7 @@ class UserRegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        visibleInvisileEye()
+        visibleOrInvisibleEye()
 
         binding.registrationButton.setOnClickListener {
             val name = binding.nameEditText.text.toString().trim().lowercase()
@@ -68,10 +68,10 @@ class UserRegistrationFragment : Fragment() {
         }
     }
 
-    fun visibleInvisileEye() {
-        var isPassowrdVisible = false
+    private fun visibleOrInvisibleEye() {
+        var isPasswordVisible = false
         binding.imageEyePassword.setOnClickListener {
-            if (isPassowrdVisible) {
+            if (isPasswordVisible) {
                 binding.editTextPassword.transformationMethod =
                     PasswordTransformationMethod.getInstance()
                 binding.editTextPasswordRepeat.transformationMethod =
@@ -84,7 +84,7 @@ class UserRegistrationFragment : Fragment() {
                     HideReturnsTransformationMethod.getInstance()
                 binding.imageEyePassword.setImageResource(R.drawable.ic_eye_open)
             }
-            isPassowrdVisible = !isPassowrdVisible
+            isPasswordVisible = !isPasswordVisible
         }
     }
 }
