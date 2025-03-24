@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.theelephant.data.repository.SpecialistRepository
 import com.example.theelephant.data.model.Parent
@@ -54,8 +55,13 @@ class UserRegistrationFragment : Fragment() {
                 passwordRepeat = passwordRepeat,
                 onSuccess = { str ->
                     Toast.makeText(requireContext(), str, Toast.LENGTH_LONG).show()
-                    findNavController().navigate(R.id.navigation_graph_2)
-                    findNavController().popBackStack(R.id.userRegistration, true)
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.userRegistration, true)
+                        .setLaunchSingleTop(true)
+                        .build()
+
+                    findNavController().navigate(R.id.action_userRegistration_to_calendarRecordingFragment2, null, navOptions)
+
                 },
                 onError = { errorMessage ->
                     Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()

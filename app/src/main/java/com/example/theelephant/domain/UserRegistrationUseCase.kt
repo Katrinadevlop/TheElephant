@@ -30,7 +30,7 @@ class UserRegistrationUseCase(
     suspend fun saveParent(currentParent: Parent): Boolean {
         return withContext(Dispatchers.IO) {
             try {
-                parentRepositoryInterfase.saveParent(currentParent)
+                parentRepositoryInterfase.addParent(currentParent)
                 true
             } catch (e: Exception) {
                 false

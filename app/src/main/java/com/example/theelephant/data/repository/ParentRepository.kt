@@ -3,7 +3,10 @@ package com.example.theelephant.data.repository
 import android.util.Log
 import com.example.theelephant.data.model.Parent
 import com.example.theelephant.domain.interfaces.ParentRepositoryInterfase
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.tasks.await
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -13,7 +16,7 @@ private val database =
 private val refParents = database.reference.child("parents")
 
 class ParentRepository : ParentRepositoryInterfase {
-    override suspend fun saveParent(parent: Parent) {
+    override suspend fun addParent(parent: Parent) {
         val parentId = refParents.push().key ?: return
 
         val parentData = mapOf(
@@ -32,7 +35,7 @@ class ParentRepository : ParentRepositoryInterfase {
         }
     }
 
-    override suspend fun updateParent(parent: Parent, parentId: String): Boolean {
+    override suspend fun changeParent(parent: Parent, parentId: String): Boolean {
         return suspendCoroutine { continuation ->
             val refParent = refParents.child(parentId)
 
@@ -93,5 +96,27 @@ class ParentRepository : ParentRepositoryInterfase {
 
     override suspend fun changePassword(changePassword:String){
         TODO("Not yet implemented")
+    }
+
+    override suspend fun getParentByPhone(phone: String, callback: (Parent?) -> Unit) {
+        val refParent = FirebaseDatabase.getInstance().getReference("parents")
+
+        refParent.orderByChild("phone").equalTo(phone)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        for (child in snapshot.children) {
+                            val parent = child.getValue(Parent::class.java)
+                            callback(parent)
+                            return
+                        }
+                    }
+                    callback(null)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    callback(null)
+                }
+            })
     }
 }

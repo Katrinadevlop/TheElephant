@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.theelephant.R
 import com.example.theelephant.data.repository.ParentRepository
@@ -37,9 +38,14 @@ class UserAuthorizationFragment : Fragment() {
             userAuthorizationViewModel.checkParent(
                 phone, password,
                 onSuccess = {
-                    //TODO val bundle = Bundle().apply { putString("userPhone", phone) }
-                    findNavController().navigate(R.id.navigation_graph_2)//bundle
-                    findNavController().popBackStack(R.id.calendarButtonMenu, true)
+                    //TODO val bundle = Bundle().apply { putString("userPhone", phone) } //bundle
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.userRegistration, true)
+                        .setLaunchSingleTop(true)
+                        .build()
+
+                    findNavController().navigate(R.id.action_userAuthorization_to_calendarRecordingFragment2, null, navOptions)
+
                 },
                 onError = { errorMessage ->
                     Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()

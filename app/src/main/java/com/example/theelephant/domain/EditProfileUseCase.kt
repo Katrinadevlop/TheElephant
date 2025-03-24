@@ -12,13 +12,13 @@ class EditProfileUseCase(private val parentRepositoryInterfase: ParentRepository
     suspend private fun findIdParent(phone: String): String {
         val parents = parentRepositoryInterfase.getAllParent()
         val findParent = parents.find { it.phone == phone }
-        return findParent?.id ?: ""
+        return "" //findParent?.id ?: ""
     }
 
     suspend fun updateParent(newParent: Parent): Boolean {
         return try {
             val idParent = findIdParent(newParent.phone)
-            parentRepositoryInterfase.updateParent(newParent, idParent)
+            parentRepositoryInterfase.changeParent(newParent, idParent)
             true
         } catch (e: Exception) {
             false

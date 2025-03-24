@@ -1,13 +1,9 @@
 package com.example.theelephant.data.repository
 
 import android.util.Log
-import com.example.theelephant.data.model.Parent
 import com.example.theelephant.data.model.Specialist
 import com.example.theelephant.domain.interfaces.SpecialistRepositoryInterface
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.tasks.await
 
 private val database =
@@ -15,24 +11,19 @@ private val database =
 private var refSpecialists = database.reference.child("specialist")
 
 class SpecialistRepository : SpecialistRepositoryInterface {
-    override suspend fun saveSpecialist(specialist: Specialist) {
-        val specialistId = refSpecialists.push().key ?: return
+    override suspend fun addSpecialist(specialist: Specialist, onComplete: (String?) -> Unit) {
+        val specialistId = refSpecialists.push().key ?: return onComplete(null)
 
-        val specialistData = mapOf(
-            "id" to specialistId,
-            "name" to specialist.name,
-            "surname" to specialist.surname,
-            "phone" to specialist.phone,
-            "password" to specialist.password,
-            "role" to specialist.role,
-            "specialization" to specialist.specialization
-        )
+        val specialistWithId = specialist.copy(id = specialistId)
 
-        refSpecialists.child(specialistId).setValue(specialistData).addOnCompleteListener { task ->
-            if (task.isSuccessful)
-                Log.e("error", "Специалист успешно зарегистрирован")
-            else
+        refSpecialists.child(specialistId).setValue(specialistWithId).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.e("success", "Специалист успешно зарегистрирован")
+                onComplete("Специалист успешно зарегистрирован")
+            } else {
                 Log.e("error", "Ошибка регистрации: ${task.exception?.message}")
+                onComplete(null)
+            }
         }
     }
 
@@ -61,7 +52,7 @@ class SpecialistRepository : SpecialistRepositoryInterface {
             }
     }
 
-    override suspend fun getSpecialist(specialistId: String, onComplete: (Specialist?) -> Unit) {
+    override suspend fun getSpecialistById(specialistId: String, onComplete: (Specialist?) -> Unit) {
         val refSpecialist = refSpecialists.child(specialistId)
 
         refSpecialist.get().addOnSuccessListener { snapshot ->
@@ -105,27 +96,5 @@ class SpecialistRepository : SpecialistRepositoryInterface {
             Log.e("error", "Ошибка при получении данных: ${e.message}")
             emptyList()
         }
-    }
-
-    override suspend fun getParentByPhone(phone: String, callback: (Parent?) -> Unit) {
-        val refParent = FirebaseDatabase.getInstance().getReference("parents")
-
-        refParent.orderByChild("phone").equalTo(phone)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        for (child in snapshot.children) {
-                            val parent = child.getValue(Parent::class.java)
-                            callback(parent)
-                            return
-                        }
-                    }
-                    callback(null)
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    callback(null)
-                }
-            })
     }
 }

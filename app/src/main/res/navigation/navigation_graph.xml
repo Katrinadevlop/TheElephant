@@ -14,30 +14,26 @@
             android:id="@+id/action_userRegistration_to_userAuthorization"
             app:destination="@id/userAuthorization" />
         <action
-            android:id="@+id/action_userRegistration_to_navigationButton2"
-            app:destination="@id/navigation_graph_2" />
+            android:id="@+id/action_userRegistration_to_calendarRecordingFragment2"
+            app:destination="@id/calendarRecordingFragment" />
     </fragment>
     <fragment
         android:id="@+id/userAuthorization"
         android:name="com.example.theelephant.presentation.fragments.UserAuthorizationFragment"
         android:label="fragment_user_authorization"
-        tools:layout="@layout/fragment_user_authorization" />
-    <navigation android:id="@+id/navigation_graph_2"
-        app:startDestination="@id/navigationButton2">
-        <fragment
-            android:id="@+id/navigationButton2"
-            android:name="com.example.theelephant.presentation.fragments.NavigationButtonFragment"
-            android:label="fragment_navigation_button"
-            tools:layout="@layout/fragment_navigation_button"/>
+        tools:layout="@layout/fragment_user_authorization" >
         <action
-            android:id="@+id/action_global_personalAccountFragment"
-            app:destination="@id/personalAccountFragment" />
-    </navigation>
+            android:id="@+id/action_userAuthorization_to_calendarRecordingFragment2"
+            app:destination="@id/calendarRecordingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/personalAccountFragment"
         android:name="com.example.theelephant.presentation.fragments.PersonalAccountFragment"
         android:label="fragment_personal_account"
-        tools:layout="@layout/fragment_personal_account" >
+        tools:layout="@layout/fragment_personal_account">
+        <action
+            android:id="@+id/action_personalAccountFragment_to_calendarRecordingFragment"
+            app:destination="@id/calendarRecordingFragment" />
         <action
             android:id="@+id/action_personalAccountFragment_to_editProfileBlankFragment"
             app:destination="@id/editProfileBlankFragment" />
@@ -47,6 +43,15 @@
         <action
             android:id="@+id/action_personalAccountFragment_to_changeThemeBlankFragment"
             app:destination="@id/changeThemeBlankFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/calendarRecordingFragment"
+        android:name="com.example.theelephant.presentation.fragments.CalendarRecordingFragment"
+        android:label="fragment_calendar_recording"
+        tools:layout="@layout/fragment_calendar_recording" >
+        <action
+            android:id="@+id/action_calendarRecordingFragment_to_personalAccountFragment"
+            app:destination="@id/personalAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileBlankFragment"

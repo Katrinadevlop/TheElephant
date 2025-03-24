@@ -1,10 +1,12 @@
 package com.example.theelephant.presentation.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import com.example.theelephant.R
 import com.example.theelephant.databinding.FragmentCalendarRecordingBinding
 
@@ -39,9 +41,9 @@ class CalendarRecordingFragment : Fragment() {
             transaction.commit()
         }
 
-       /* val specialistExemplar = SpecialistProvider()
+        val specialistExemplar = SpecialistProvider()
         val specialist = specialistExemplar.getSpecialist().map {it.specialization}.toMutableList()
-        specialist.add(0, "Выберите специалиста")*/
+        specialist.add(0, "Выберите специалиста")
 
      /*   val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, specialist)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -71,6 +73,20 @@ class CalendarRecordingFragment : Fragment() {
         //TODO:доделать запись к специалисту
         //val schedule = Schedule(selectedDate, "9:00", specialistId)
 
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            showExitDialog()
+        }
+    }
 
+    private fun showExitDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setMessage("Выйти из приложения?").setCancelable(false)
+            .setPositiveButton("Да") { dialog, id ->
+                requireActivity().finish()
+            }.setNegativeButton("Нет") { dialog, id ->
+                dialog.dismiss()
+            }
+        val alert = builder.create()
+        alert.show()
     }
 }
