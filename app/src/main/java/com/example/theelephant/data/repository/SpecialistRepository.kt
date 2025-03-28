@@ -16,15 +16,16 @@ class SpecialistRepository : SpecialistRepositoryInterface {
 
         val specialistWithId = specialist.copy(id = specialistId)
 
-        refSpecialists.child(specialistId).setValue(specialistWithId).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                Log.e("success", "Специалист успешно зарегистрирован")
-                onComplete("Специалист успешно зарегистрирован")
-            } else {
-                Log.e("error", "Ошибка регистрации: ${task.exception?.message}")
-                onComplete(null)
+        refSpecialists.child(specialistId).setValue(specialistWithId)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d("success", "Специалист успешно зарегистрирован")
+                    onComplete("Специалист успешно зарегистрирован")
+                } else {
+                    Log.e("error", "Ошибка регистрации: ${task.exception?.message}")
+                    onComplete(null)
+                }
             }
-        }
     }
 
     override suspend fun changeSpecialist(
@@ -45,14 +46,44 @@ class SpecialistRepository : SpecialistRepositoryInterface {
 
         refSpecialist.updateChildren(updatedSpecialist)
             .addOnSuccessListener {
+                Log.d("success", "Специалист успешно изменен")
                 onComplete(true)
             }
             .addOnFailureListener {
+                Log.e("error", "Ошибка при изменении специалиста")
                 onComplete(false)
             }
     }
 
-    override suspend fun getSpecialistById(specialistId: String, onComplete: (Specialist?) -> Unit) {
+    override suspend fun getAllSpecialist(): List<Specialist> {
+        return try {
+            val snapshot = refSpecialists.get().await()
+            val listSpecialist = snapshot.children.mapNotNull { specialistSnapshot ->
+                try {
+                    Specialist(
+                        name = specialistSnapshot.child("name").value as String,
+                        surname = specialistSnapshot.child("surname").value as String,
+                        phone = specialistSnapshot.child("phone").value as String,
+                        password = specialistSnapshot.child("password").value as String,
+                        role = Specialist.Role.valueOf(specialistSnapshot.child("role").value as String),
+                        specialization = specialistSnapshot.child("specialization").value as String
+                    )
+                } catch (e: Exception) {
+                    Log.e("error", "Ошибка при получении данных: ${e.message}")
+                    null
+                }
+            }
+            listSpecialist
+        } catch (e: Exception) {
+            Log.e("error", "Ошибка при получении данных: ${e.message}")
+            emptyList()
+        }
+    }
+
+    override suspend fun getSpecialistById(
+        specialistId: String,
+        onComplete: (Specialist?) -> Unit,
+    ) {
         val refSpecialist = refSpecialists.child(specialistId)
 
         refSpecialist.get().addOnSuccessListener { snapshot ->
@@ -65,36 +96,15 @@ class SpecialistRepository : SpecialistRepositoryInterface {
                     role = snapshot.child("role").value as Specialist.Role,
                     specialization = snapshot.child("specialization").value as String
                 )
+                Log.d("success", "Специалист успешно получен по id")
                 onComplete(specialist)
             } else {
+                Log.e("error", "Ошибка получения специалиста по id")
                 onComplete(null)
             }
         }.addOnFailureListener {
+            Log.e("error", "Ошибка получения специалиста по id")
             onComplete(null)
-        }
-    }
-
-    override suspend fun getAllSpecialist(): List<Specialist> {
-        return try {
-            val snapshot = refSpecialists.get().await()
-            val listSpecialist = snapshot.children.mapNotNull { child ->
-                try {
-                    Specialist(
-                        name = child.child("name").value as String,
-                        surname = child.child("surname").value as String,
-                        phone = child.child("phone").value as String,
-                        password = child.child("password").value as String,
-                        role = Specialist.Role.valueOf(child.child("role").value as String),
-                        specialization = child.child("specialization").value as String
-                    )
-                } catch (e: Exception) {
-                    null
-                }
-            }
-            listSpecialist
-        } catch (e: Exception) {
-            Log.e("error", "Ошибка при получении данных: ${e.message}")
-            emptyList()
         }
     }
 }

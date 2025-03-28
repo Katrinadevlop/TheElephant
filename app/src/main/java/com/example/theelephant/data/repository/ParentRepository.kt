@@ -3,73 +3,53 @@ package com.example.theelephant.data.repository
 import android.util.Log
 import com.example.theelephant.data.model.Parent
 import com.example.theelephant.domain.interfaces.ParentRepositoryInterfase
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.tasks.await
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 private val database =
     FirebaseDatabase.getInstance("https://the-elephant-40f43-default-rtdb.europe-west1.firebasedatabase.app")
 private val refParents = database.reference.child("parents")
 
 class ParentRepository : ParentRepositoryInterfase {
-    override suspend fun addParent(parent: Parent) {
+    override suspend fun addParent(parent: Parent, onComplete: (String?) -> Unit) {
         val parentId = refParents.push().key ?: return
 
-        val parentData = mapOf(
-            "id" to parentId,
+        val parentWithId = parent.copy(id = parentId)
+
+        refParents.child(parentId).setValue(parentWithId).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                Log.d("success", "Родитель успешно зарегистрирован")
+                onComplete("Родитель успешно зарегистрирован")
+            } else {
+                Log.e("error", "Ошибка регистрации: ${task.exception?.message}")
+                onComplete(null)
+            }
+        }
+    }
+
+    override suspend fun changeParent(
+        parent: Parent,
+        parentId: String,
+        onComplete: (Boolean) -> Unit,
+    ) {
+        val refParent = refParents.child(parentId)
+
+        val updatedParent = mapOf(
             "name" to parent.name,
             "surname" to parent.surname,
             "phone" to parent.phone,
-            "password" to parent.password
+            "password" to parent.password,
         )
 
-        refParents.child(parentId).setValue(parentData).addOnCompleteListener { task ->
-            if (task.isSuccessful)
-                Log.e("error", "Родитель успешно зарегистрирован")
-            else
-                Log.e("error", "Ошибка регистрации: ${task.exception?.message}")
-        }
-    }
-
-    override suspend fun changeParent(parent: Parent, parentId: String): Boolean {
-        return suspendCoroutine { continuation ->
-            val refParent = refParents.child(parentId)
-
-            val updatedParent = mapOf(
-                "name" to parent.name,
-                "surname" to parent.surname,
-                "phone" to parent.phone,
-                "password" to parent.password,
-            )
-
-            refParent.updateChildren(updatedParent)
-                .addOnSuccessListener { continuation.resume(true) }
-                .addOnFailureListener { continuation.resume(false) }
-        }
-    }
-
-    override suspend fun getParent(phone: String, onComplete: (Parent?) -> Unit) {
-        val refParent = refParents.child(phone)
-
-        refParent.get().addOnSuccessListener { snapshot ->
-            if (snapshot.exists()) {
-                val parent = Parent(
-                    name = snapshot.child("name").value as String,
-                    surname = snapshot.child("surname").value as String,
-                    phone = snapshot.child("phone").value as String,
-                    password = snapshot.child("password").value as String,
-                )
-                onComplete(parent)
-            } else {
-                onComplete(null)
+        refParent.updateChildren(updatedParent)
+            .addOnSuccessListener {
+                Log.d("success", "Родитель успешно изменен")
+                onComplete(true)
             }
-        }.addOnFailureListener {
-            onComplete(null)
-        }
+            .addOnFailureListener {
+                Log.e("error", "Ошибка. Родитель не изменен")
+                onComplete(false)
+            }
     }
 
     override suspend fun getAllParent(): List<Parent> {
@@ -84,6 +64,7 @@ class ParentRepository : ParentRepositoryInterfase {
                         password = parentSnapshot.child("password").value as String
                     )
                 } catch (e: Exception) {
+                    Log.e("error", "Ошибка при получении данных: ${e.message}")
                     null
                 }
             }
@@ -94,29 +75,47 @@ class ParentRepository : ParentRepositoryInterfase {
         }
     }
 
-    override suspend fun changePassword(changePassword:String){
-        TODO("Not yet implemented")
+    override suspend fun getParentById(
+        parentId: String,
+        onComplete: (Parent?) -> Unit
+    ) {
+        val refParent = refParents.child(parentId)
+
+        refParent.get().addOnSuccessListener { snapshot ->
+            if (snapshot.exists()) {
+                val parent = Parent(
+                    name = snapshot.child("name").value as String,
+                    surname = snapshot.child("surname").value as String,
+                    phone = snapshot.child("phone").value as String,
+                    password = snapshot.child("password").value as String,
+                )
+                Log.d("success", "Успешно, родитель получен по id")
+                onComplete(parent)
+            } else {
+                Log.e("error", "Ошибка при получении данных родителя по id")
+                onComplete(null)
+            }
+        }.addOnFailureListener {
+            Log.e("error", "Ошибка при получении данных родителя по id")
+            onComplete(null)
+        }
     }
 
-    override suspend fun getParentByPhone(phone: String, callback: (Parent?) -> Unit) {
-        val refParent = FirebaseDatabase.getInstance().getReference("parents")
+    override suspend fun changePassword(parentId: String, changePassword: String, onComplete: (Boolean) -> Unit) {
+        val refParent = refParents.child(parentId)
 
-        refParent.orderByChild("phone").equalTo(phone)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        for (child in snapshot.children) {
-                            val parent = child.getValue(Parent::class.java)
-                            callback(parent)
-                            return
-                        }
-                    }
-                    callback(null)
-                }
+        val updatedParent = mapOf(
+            "password" to changePassword,
+        )
 
-                override fun onCancelled(error: DatabaseError) {
-                    callback(null)
-                }
-            })
+        refParent.updateChildren(updatedParent)
+            .addOnSuccessListener {
+                Log.d("success", "Пароль успешно изменен")
+                onComplete(true)
+            }
+            .addOnFailureListener {
+                Log.e("error", "Ошибка. Пароль не изменен")
+                onComplete(false)
+            }
     }
 }
