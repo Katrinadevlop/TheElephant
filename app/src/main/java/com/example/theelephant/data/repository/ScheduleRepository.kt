@@ -12,44 +12,40 @@ private var refSchedule = database.reference.child("schedule")
 
 
 class ScheduleRepository : ScheduleInterface {
-    override suspend fun addSSchedule(schedule: Schedule, onComplete: (String?) -> Unit) {
-        val scheduleId = refSchedule.push().key ?: return onComplete(null)
+    override suspend fun addSSchedule(schedule: Schedule) {
+        val scheduleId = refSchedule.push().key ?: return
 
         val scheduleData = schedule.copy(id = scheduleId)
         refSchedule.child(scheduleId).setValue(scheduleData).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.d("success", "Запись успещно сохранена")
-                onComplete("Запись успещно сохранена")
             } else {
                 Log.e("error", "Ошибка добавления: ${task.exception?.message}")
-                onComplete(null)
             }
         }
     }
 
     override suspend fun changeSchedule(
         scheduleId: String,
-        schedule: Schedule,
-        onComplete: (Boolean) -> Unit,
-    ) {
-        val refSchedule = refSchedule.child(scheduleId)
+        schedule: Schedule
+    ): Boolean {
+        return try {
+            val refSchedule = refSchedule.child(scheduleId)
 
-        val updateSchedule = mapOf(
-            "date" to schedule.date,
-            "time" to schedule.time,
-            "specialistId" to schedule.specialistId,
-            "parentId" to schedule.parentId
-        )
+            val updatedSchedule = mapOf(
+                "date" to schedule.date,
+                "time" to schedule.time,
+                "specialistId" to schedule.specialistId,
+                "parentId" to schedule.parentId
+            )
 
-        refSchedule.updateChildren(updateSchedule)
-            .addOnSuccessListener {
-                Log.d("succes", "Запись успешно изменена")
-                onComplete(true)
-            }
-            .addOnSuccessListener {
-                Log.e("error", "Ошибка при изменении записи")
-                onComplete(false)
-            }
+            refSchedule.updateChildren(updatedSchedule).await() // ✅ Ждём завершения
+            Log.d("success", "Запись успешно изменена")
+            true
+        } catch (e: Exception) {
+            Log.e("error", "Ошибка при изменении записи: ${e.message}")
+            false
+        }
     }
 
     override suspend fun getAllSchedule(): List<Schedule> {

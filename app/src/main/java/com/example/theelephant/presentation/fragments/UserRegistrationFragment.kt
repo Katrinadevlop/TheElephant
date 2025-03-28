@@ -51,7 +51,7 @@ class UserRegistrationFragment : Fragment() {
             val passwordRepeat = binding.editTextPasswordRepeat.text.toString().trim()
 
             userRegistrationViewModel.registerParent(
-                parent = Parent(name, surname, phone, password),
+                parent = Parent(id = "", name, surname, phone, password),
                 passwordRepeat = passwordRepeat,
                 onSuccess = { str ->
                     Toast.makeText(requireContext(), str, Toast.LENGTH_LONG).show()

@@ -1,18 +1,34 @@
 package com.example.theelephant.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.theelephant.R
+import com.example.theelephant.data.repository.ScheduleRepository
+import com.example.theelephant.data.repository.SpecialistRepository
 import com.example.theelephant.databinding.FragmentCalendarRecordingBinding
+import com.example.theelephant.domain.ScheduleUseCase
+import com.example.theelephant.presentation.viewModel.CalendarRecordingViewModel
+import kotlinx.coroutines.launch
 
 class CalendarRecordingFragment : Fragment() {
 
     private lateinit var binding: FragmentCalendarRecordingBinding
+    private val calendarRecordingViewModel: CalendarRecordingViewModel
+        get() = CalendarRecordingViewModel(
+            ScheduleUseCase(
+                scheduleInterface = ScheduleRepository(),
+                specialistRepositoryInterface = SpecialistRepository()
+            )
+        )
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +42,7 @@ class CalendarRecordingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var selectedDate = ""
-        binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+        binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             selectedDate = "$dayOfMonth/${month + 1}/$year"
 
             val calendarRecordingFragment = CalendarRecordingFragment()
@@ -41,34 +57,24 @@ class CalendarRecordingFragment : Fragment() {
             transaction.commit()
         }
 
-        val specialistExemplar = SpecialistProvider()
-        val specialist = specialistExemplar.getSpecialist().map {it.specialization}.toMutableList()
-        specialist.add(0, "Выберите специалиста")
+        lifecycleScope.launch {
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, calendarRecordingViewModel.getSpecialist())
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.specialistSpinner.adapter = adapter
+        }
 
-     /*   val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, specialist)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.specialistSpinner.adapter = adapter*/
-/*
-
-        var selectedSpecialist = ""
         binding.specialistSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
-                id: Long
+                id: Long,
             ) {
-                selectedSpecialist = specialist[position]
-                Log.d("SpinnerSelection", "Выбран специалист: $selectedSpecialist")
+                Log.d("SpinnerSelection", "Выбран специалист: $")//TODO
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onNothingSelected(parent: AdapterView<*>?){}
         }
-
-        val id = specialistExemplar.getSpecialist().find{selectedSpecialist == it.specialization}
-        val specialistId = id
-*/
-
 
         //TODO:доделать запись к специалисту
         //val schedule = Schedule(selectedDate, "9:00", specialistId)
@@ -81,9 +87,9 @@ class CalendarRecordingFragment : Fragment() {
     private fun showExitDialog() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setMessage("Выйти из приложения?").setCancelable(false)
-            .setPositiveButton("Да") { dialog, id ->
+            .setPositiveButton("Да") { _, _ ->
                 requireActivity().finish()
-            }.setNegativeButton("Нет") { dialog, id ->
+            }.setNegativeButton("Нет") { dialog, _ ->
                 dialog.dismiss()
             }
         val alert = builder.create()

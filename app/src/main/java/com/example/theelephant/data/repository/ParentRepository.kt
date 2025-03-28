@@ -11,7 +11,7 @@ private val database =
 private val refParents = database.reference.child("parents")
 
 class ParentRepository : ParentRepositoryInterfase {
-    override suspend fun addParent(parent: Parent, onComplete: (String?) -> Unit) {
+    override suspend fun addParent(parent: Parent) {
         val parentId = refParents.push().key ?: return
 
         val parentWithId = parent.copy(id = parentId)
@@ -19,37 +19,33 @@ class ParentRepository : ParentRepositoryInterfase {
         refParents.child(parentId).setValue(parentWithId).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 Log.d("success", "Родитель успешно зарегистрирован")
-                onComplete("Родитель успешно зарегистрирован")
             } else {
                 Log.e("error", "Ошибка регистрации: ${task.exception?.message}")
-                onComplete(null)
             }
         }
     }
 
     override suspend fun changeParent(
         parent: Parent,
-        parentId: String,
-        onComplete: (Boolean) -> Unit,
-    ) {
-        val refParent = refParents.child(parentId)
+        parentId: String
+    ): Boolean {
+        return try {
+            val refParent = refParents.child(parentId)
 
-        val updatedParent = mapOf(
-            "name" to parent.name,
-            "surname" to parent.surname,
-            "phone" to parent.phone,
-            "password" to parent.password,
-        )
+            val updatedParent = mapOf(
+                "name" to parent.name,
+                "surname" to parent.surname,
+                "phone" to parent.phone,
+                "password" to parent.password
+            )
 
-        refParent.updateChildren(updatedParent)
-            .addOnSuccessListener {
-                Log.d("success", "Родитель успешно изменен")
-                onComplete(true)
-            }
-            .addOnFailureListener {
-                Log.e("error", "Ошибка. Родитель не изменен")
-                onComplete(false)
-            }
+            refParent.updateChildren(updatedParent).await()
+            Log.d("success", "Родитель успешно изменен")
+            true
+        } catch (e: Exception) {
+            Log.e("error", "Ошибка. Родитель не изменен: ${e.message}")
+            false
+        }
     }
 
     override suspend fun getAllParent(): List<Parent> {
@@ -77,7 +73,7 @@ class ParentRepository : ParentRepositoryInterfase {
 
     override suspend fun getParentById(
         parentId: String,
-        onComplete: (Parent?) -> Unit
+        onComplete: (Parent?) -> Unit,
     ) {
         val refParent = refParents.child(parentId)
 
@@ -101,7 +97,11 @@ class ParentRepository : ParentRepositoryInterfase {
         }
     }
 
-    override suspend fun changePassword(parentId: String, changePassword: String, onComplete: (Boolean) -> Unit) {
+    override suspend fun changePassword(
+        parentId: String,
+        changePassword: String,
+        onComplete: (Boolean) -> Unit,
+    ) {
         val refParent = refParents.child(parentId)
 
         val updatedParent = mapOf(

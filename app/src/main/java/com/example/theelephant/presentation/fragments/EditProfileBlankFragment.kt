@@ -41,7 +41,7 @@ class EditProfileBlankFragment : Fragment() {
             val surname = binding.surnameEditText.text.toString().trim()
             val phone = binding.phoneEditText.text.toString().trim()
 
-            val currentParent = Parent(name, surname, phone, password = "")
+            val currentParent = Parent(id = "", name, surname, phone, password = "")
             editProfileViewModel.updateParent(currentParent,
                 onSuccess = { message ->
                     Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()

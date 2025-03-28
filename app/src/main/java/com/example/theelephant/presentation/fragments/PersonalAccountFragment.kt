@@ -12,14 +12,13 @@ import androidx.navigation.fragment.findNavController
 import com.example.theelephant.R
 import com.example.theelephant.data.repository.ParentRepository
 import com.example.theelephant.databinding.FragmentPersonalAccountBinding
-import com.example.theelephant.domain.PersonalAccountUseCase
 import com.example.theelephant.presentation.viewModel.PersonalAccountViewModel
 
 class PersonalAccountFragment : Fragment() {
 
     private lateinit var binding: FragmentPersonalAccountBinding
-    private val personalAccountViewModel: PersonalAccountViewModel
-        get() = PersonalAccountViewModel(PersonalAccountUseCase(ParentRepository()))
+ /*   private val personalAccountViewModel: PersonalAccountViewModel
+        get() = PersonalAccountViewModel(PersonalAccountUseCase(ParentRepository()))*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

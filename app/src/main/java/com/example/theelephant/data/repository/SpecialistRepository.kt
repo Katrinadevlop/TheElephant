@@ -11,8 +11,8 @@ private val database =
 private var refSpecialists = database.reference.child("specialist")
 
 class SpecialistRepository : SpecialistRepositoryInterface {
-    override suspend fun addSpecialist(specialist: Specialist, onComplete: (String?) -> Unit) {
-        val specialistId = refSpecialists.push().key ?: return onComplete(null)
+    override suspend fun addSpecialist(specialist: Specialist) {
+        val specialistId = refSpecialists.push().key ?: return
 
         val specialistWithId = specialist.copy(id = specialistId)
 
@@ -20,39 +20,35 @@ class SpecialistRepository : SpecialistRepositoryInterface {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d("success", "Специалист успешно зарегистрирован")
-                    onComplete("Специалист успешно зарегистрирован")
                 } else {
                     Log.e("error", "Ошибка регистрации: ${task.exception?.message}")
-                    onComplete(null)
                 }
             }
     }
 
     override suspend fun changeSpecialist(
         specialist: Specialist,
-        specialistId: String,
-        onComplete: (Boolean) -> Unit,
-    ) {
-        val refSpecialist = refSpecialists.child(specialistId)
+        specialistId: String
+    ): Boolean {
+        return try {
+            val refSpecialist = refSpecialists.child(specialistId)
 
-        val updatedSpecialist = mapOf(
-            "name" to specialist.name,
-            "surname" to specialist.surname,
-            "phone" to specialist.phone,
-            "password" to specialist.password,
-            "role" to specialist.role.name,
-            "specialization" to specialist.specialization
-        )
+            val updatedSpecialist = mapOf(
+                "name" to specialist.name,
+                "surname" to specialist.surname,
+                "phone" to specialist.phone,
+                "password" to specialist.password,
+                "role" to specialist.role.name,
+                "specialization" to specialist.specialization
+            )
 
-        refSpecialist.updateChildren(updatedSpecialist)
-            .addOnSuccessListener {
-                Log.d("success", "Специалист успешно изменен")
-                onComplete(true)
-            }
-            .addOnFailureListener {
-                Log.e("error", "Ошибка при изменении специалиста")
-                onComplete(false)
-            }
+            refSpecialist.updateChildren(updatedSpecialist).await() // ✅ Ждём завершения
+            Log.d("success", "Специалист успешно изменен")
+            true
+        } catch (e: Exception) {
+            Log.e("error", "Ошибка при изменении специалиста: ${e.message}")
+            false
+        }
     }
 
     override suspend fun getAllSpecialist(): List<Specialist> {
