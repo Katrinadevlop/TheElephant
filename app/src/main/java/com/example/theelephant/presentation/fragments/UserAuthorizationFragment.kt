@@ -1,6 +1,7 @@
 package com.example.theelephant.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -38,14 +39,9 @@ class UserAuthorizationFragment : Fragment() {
             userAuthorizationViewModel.checkParent(
                 phone, password,
                 onSuccess = {
-                    //TODO val bundle = Bundle().apply { putString("userPhone", phone) } //bundle
-                    val navOptions = NavOptions.Builder()
-                        .setPopUpTo(R.id.userRegistration, true)
-                        .setLaunchSingleTop(true)
-                        .build()
-
-                    findNavController().navigate(R.id.action_userAuthorization_to_calendarRecordingFragment2, null, navOptions)
-
+                    val action = UserAuthorizationFragmentDirections
+                        .actionUserAuthorizationToCalendarRecordingFragment2(phone)
+                    findNavController().navigate(action)
                 },
                 onError = { errorMessage ->
                     Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()

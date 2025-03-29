@@ -1,9 +1,10 @@
 import org.jetbrains.kotlin.backend.wasm.ir2wasm.bind
 
- plugins {
+plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
      id("com.google.gms.google-services")
+     id("androidx.navigation.safeargs")
 }
 
 android {
@@ -76,4 +77,8 @@ dependencies {
     implementation(libs.google.firebase.analytics)
     implementation("com.google.android.gms:play-services-auth:20.7.0")
     implementation (libs.firebase.ui.auth)
+
+    val nav_version = "2.7.5"
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 }

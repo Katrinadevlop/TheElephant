@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/calendarRecordingFragment">
+    app:startDestination="@id/userRegistration">
 
     <fragment
         android:id="@+id/userRegistration"
@@ -31,6 +31,9 @@
         android:name="com.example.theelephant.presentation.fragments.PersonalAccountFragment"
         android:label="fragment_personal_account"
         tools:layout="@layout/fragment_personal_account">
+        <argument
+            android:name="userPhone"
+            app:argType="string" />
         <action
             android:id="@+id/action_personalAccountFragment_to_calendarRecordingFragment"
             app:destination="@id/calendarRecordingFragment" />
@@ -43,15 +46,27 @@
         <action
             android:id="@+id/action_personalAccountFragment_to_changeThemeBlankFragment"
             app:destination="@id/changeThemeBlankFragment" />
+        <action
+            android:id="@+id/action_personalAccountFragment_to_userRegistration"
+            app:destination="@id/userRegistration" />
+        <action
+            android:id="@+id/action_personalAccountFragment_self"
+            app:destination="@id/personalAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/calendarRecordingFragment"
         android:name="com.example.theelephant.presentation.fragments.CalendarRecordingFragment"
         android:label="fragment_calendar_recording"
         tools:layout="@layout/fragment_calendar_recording" >
+        <argument
+            android:name="userPhone"
+            app:argType="string" />
         <action
             android:id="@+id/action_calendarRecordingFragment_to_personalAccountFragment"
             app:destination="@id/personalAccountFragment" />
+        <action
+            android:id="@+id/action_calendarRecordingFragment_self"
+            app:destination="@id/calendarRecordingFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileBlankFragment"
