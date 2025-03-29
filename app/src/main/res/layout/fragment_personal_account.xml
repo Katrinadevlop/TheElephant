@@ -42,7 +42,8 @@
                 android:width="150dp"
                 android:height="40dp"
                 android:gravity="left"
-                android:text="@string/name" />
+                android:text="@string/name"
+                android:textColor="?android:textColorPrimary"/>
 
             <TextView
                 android:id="@+id/surnameTextView"
@@ -50,7 +51,8 @@
                 android:width="150dp"
                 android:height="40dp"
                 android:gravity="left"
-                android:text="@string/surname" />
+                android:text="@string/surname"
+                android:textColor="?android:textColorPrimary"/>
 
             <TextView
                 android:id="@+id/phoneTextView"
@@ -58,7 +60,8 @@
                 android:width="150dp"
                 android:height="40dp"
                 android:gravity="left"
-                android:text="@string/phone" />
+                android:text="@string/phone"
+                android:textColor="?android:textColorPrimary"/>
 
             <TextView
                 android:id="@+id/remainingClasses"
@@ -66,7 +69,8 @@
                 android:width="150dp"
                 android:height="40dp"
                 android:gravity="left"
-                android:text="@string/remaining_classes" />
+                android:text="@string/remaining_classes"
+                android:textColor="?android:textColorPrimary"/>
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -84,22 +88,26 @@
         <TextView
             android:id="@+id/editProfile"
             style="@style/MenuTextView"
-            android:text="@string/edit_profile" />
+            android:text="@string/edit_profile"
+            android:textColor="?android:textColorPrimary"/>
 
         <TextView
             android:id="@+id/editPassword"
             style="@style/MenuTextView"
-            android:text="@string/change_password" />
+            android:text="@string/change_password"
+            android:textColor="?android:textColorPrimary"/>
 
         <TextView
             android:id="@+id/editTheme"
             style="@style/MenuTextView"
-            android:text="@string/change_theme" />
+            android:text="@string/change_theme"
+            android:textColor="?android:textColorPrimary"/>
 
         <TextView
             android:id="@+id/exitAccount"
             style="@style/MenuTextView"
-            android:text="@string/log_out_account" />
+            android:text="@string/log_out_account"
+            android:textColor="?android:textColorPrimary"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

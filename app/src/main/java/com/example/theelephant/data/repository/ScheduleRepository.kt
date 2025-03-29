@@ -12,7 +12,7 @@ private var refSchedule = database.reference.child("schedule")
 
 
 class ScheduleRepository : ScheduleInterface {
-    override suspend fun addSSchedule(schedule: Schedule) {
+    override suspend fun addSchedule(schedule: Schedule) {
         val scheduleId = refSchedule.push().key ?: return
 
         val scheduleData = schedule.copy(id = scheduleId)

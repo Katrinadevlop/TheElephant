@@ -57,15 +57,27 @@
         android:id="@+id/editProfileBlankFragment"
         android:name="com.example.theelephant.presentation.fragments.EditProfileBlankFragment"
         android:label="fragment_edit_profile_blank"
-        tools:layout="@layout/fragment_edit_profile_blank" />
+        tools:layout="@layout/fragment_edit_profile_blank" >
+        <action
+            android:id="@+id/action_editProfileBlankFragment_to_personalAccountFragment"
+            app:destination="@id/personalAccountFragment" />
+    </fragment>
     <fragment
         android:id="@+id/changePasswordBlankFragment"
         android:name="com.example.theelephant.presentation.fragments.ChangePasswordBlankFragment"
         android:label="fragment_change_password_blank"
-        tools:layout="@layout/fragment_change_password_blank" />
+        tools:layout="@layout/fragment_change_password_blank" >
+        <action
+            android:id="@+id/action_changePasswordBlankFragment_to_personalAccountFragment"
+            app:destination="@id/personalAccountFragment" />
+    </fragment>
     <fragment
         android:id="@+id/changeThemeBlankFragment"
         android:name="com.example.theelephant.presentation.fragments.ChangeThemeBlankFragment"
         android:label="fragment_change_theme_blank"
-        tools:layout="@layout/fragment_change_theme_blank" />
+        tools:layout="@layout/fragment_change_theme_blank" >
+        <action
+            android:id="@+id/action_changeThemeBlankFragment_to_personalAccountFragment"
+            app:destination="@id/personalAccountFragment" />
+    </fragment>
 </navigation>

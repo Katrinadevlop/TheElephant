@@ -44,59 +44,11 @@ class PersonalAccountFragment : Fragment() {
             findNavController().navigate(R.id.action_personalAccountFragment_to_changePasswordBlankFragment)
         }
 
-      /*  var isDark = getSaveThemeState()
-        if (isDark) {
-            setDarkTheme()
-        } else {
-            setLightTheme()
-        }*/
-
         binding.editTheme.setOnClickListener {
             findNavController().navigate(R.id.action_personalAccountFragment_to_changeThemeBlankFragment)
-
-            /*isDark = !isDark
-            if (isDark) {
-                setDarkTheme()
-            } else {
-                setLightTheme()
-            }
-            saveThemeState(isDark)*/
         }
 
         binding.exitAccount.setOnClickListener {
         }
     }
-
-  /*  fun setDarkTheme() {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-    }
-
-    fun setLightTheme() {
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-    }
-
-    fun getSaveThemeState(): Boolean {
-        val sharedPreferences =
-            requireContext().getSharedPreferences("themeState", Context.MODE_PRIVATE)
-        return sharedPreferences.getBoolean("isDark", false)
-    }
-
-    fun saveThemeState(isDarkTheme: Boolean) {
-        val sharedPreferences =
-            requireContext().getSharedPreferences("themeState", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit().putBoolean("isDark", isDarkTheme).apply()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val textColor = if (getSaveThemeState()) R.color.black else R.color.white
-        binding.nameTextView.setTextColor(ContextCompat.getColor(requireContext(), textColor))
-        binding.surnameTextView.setTextColor(ContextCompat.getColor(requireContext(), textColor))
-        binding.phoneTextView.setTextColor(ContextCompat.getColor(requireContext(), textColor))
-        binding.remainingClasses.setTextColor(ContextCompat.getColor(requireContext(), textColor))
-        binding.editProfile.setTextColor(ContextCompat.getColor(requireContext(), textColor))
-        binding.editPassword.setTextColor(ContextCompat.getColor(requireContext(), textColor))
-        binding.editTheme.setTextColor(ContextCompat.getColor(requireContext(), textColor))
-        binding.exitAccount.setTextColor(ContextCompat.getColor(requireContext(), textColor))
-    }*/
 }

@@ -6,105 +6,132 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.fragments.RecordListFragment">
 
-    <GridLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:columnCount="4"
-        android:orientation="vertical"
-        android:rowCount="5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_9_00" />
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="4"
+            android:orientation="vertical"
+            android:rowCount="5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_9_30" />
+            <Button
+                android:id="@+id/buttonTime900"
+                style="@style/TextViewCalendar"
+                android:text="@string/_9_00" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_10_00" />
+            <Button
+                android:id="@+id/buttonTime930"
+                style="@style/TextViewCalendar"
+                android:text="@string/_9_30" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_10_30" />
+            <Button
+                android:id="@+id/buttonTime100"
+                style="@style/TextViewCalendar"
+                android:text="@string/_10_00" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_11_00" />
+            <Button
+                android:id="@+id/buttonTime1030"
+                style="@style/TextViewCalendar"
+                android:text="@string/_10_30" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_11_30" />
+            <Button
+                android:id="@+id/buttonTime1100"
+                style="@style/TextViewCalendar"
+                android:text="@string/_11_00" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_12_00" />
+            <Button
+                android:id="@+id/buttonTime1130"
+                style="@style/TextViewCalendar"
+                android:text="@string/_11_30" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_12_30" />
+            <Button
+                android:id="@+id/buttonTime1200"
+                style="@style/TextViewCalendar"
+                android:text="@string/_12_00" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_13_00" />
+            <Button
+                android:id="@+id/buttonTime1230"
+                style="@style/TextViewCalendar"
+                android:text="@string/_12_30" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_13_30" />
+            <Button
+                android:id="@+id/buttonTime1300"
+                style="@style/TextViewCalendar"
+                android:text="@string/_13_00" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_14_00" />
+            <Button
+                android:id="@+id/buttonTime1330"
+                style="@style/TextViewCalendar"
+                android:text="@string/_13_30" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_14_30" />
+            <Button
+                android:id="@+id/buttonTime1400"
+                style="@style/TextViewCalendar"
+                android:text="@string/_14_00" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_15_00" />
+            <Button
+                android:id="@+id/buttonTime1430"
+                style="@style/TextViewCalendar"
+                android:text="@string/_14_30" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_15_30" />
+            <Button
+                android:id="@+id/buttonTime1500"
+                style="@style/TextViewCalendar"
+                android:text="@string/_15_00" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_16_00" />
+            <Button
+                android:id="@+id/buttonTime1530"
+                style="@style/TextViewCalendar"
+                android:text="@string/_15_30" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_16_30" />
+            <Button
+                android:id="@+id/buttonTime1600"
+                style="@style/TextViewCalendar"
+                android:text="@string/_16_00" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_17_00" />
+            <Button
+                android:id="@+id/buttonTime1630"
+                style="@style/TextViewCalendar"
+                android:text="@string/_16_30" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_17_30" />
+            <Button
+                android:id="@+id/buttonTime1700"
+                style="@style/TextViewCalendar"
+                android:text="@string/_17_00" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_18_00" />
+            <Button
+                android:id="@+id/buttonTime1730"
+                style="@style/TextViewCalendar"
+                android:text="@string/_17_30" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_18_30" />
+            <Button
+                android:id="@+id/buttonTime1800"
+                style="@style/TextViewCalendar"
+                android:text="@string/_18_00" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_19_00" />
+            <Button
+                android:id="@+id/buttonTime1830"
+                style="@style/TextViewCalendar"
+                android:text="@string/_18_30" />
 
-        <TextView
-            style="@style/TextViewCalendar"
-            android:text="@string/_19_30" />
+            <Button
+                android:id="@+id/buttonTime1900"
+                style="@style/TextViewCalendar"
+                android:text="@string/_19_00" />
 
-    </GridLayout>
+            <Button
+                android:id="@+id/buttonTime1930"
+                style="@style/TextViewCalendar"
+                android:text="@string/_19_30" />
+
+        </GridLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

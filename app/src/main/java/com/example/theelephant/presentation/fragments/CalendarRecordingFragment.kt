@@ -1,14 +1,13 @@
 package com.example.theelephant.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.theelephant.R
@@ -42,19 +41,29 @@ class CalendarRecordingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         var selectedDate = ""
+        var specialist = ""
+
+        binding.specialistSpinner.isInvisible = selectedDate.isEmpty()
+
         binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             selectedDate = "$dayOfMonth/${month + 1}/$year"
+            specialist =  binding.specialistSpinner.selectedItem.toString()
 
             val calendarRecordingFragment = CalendarRecordingFragment()
 
             val bundle = Bundle().apply {
                 putString("selectedDate", selectedDate)
+                putString("specialist", specialist)
             }
             calendarRecordingFragment.arguments = bundle
 
+            binding.specialistSpinner.isInvisible = selectedDate.isEmpty()
+
+            if (specialist.isEmpty()) return@setOnDateChangeListener
+
+            val recordListFragment = RecordListFragment.newInstance(selectedDate, specialist)
             val transaction = childFragmentManager.beginTransaction()
-            transaction.replace(R.id.frameLayout, RecordListFragment())
-            transaction.commit()
+            transaction.replace(R.id.frameLayout, recordListFragment).commit()
         }
 
         lifecycleScope.launch {
@@ -62,22 +71,6 @@ class CalendarRecordingFragment : Fragment() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.specialistSpinner.adapter = adapter
         }
-
-        binding.specialistSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long,
-            ) {
-                Log.d("SpinnerSelection", "Выбран специалист: $")//TODO
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?){}
-        }
-
-        //TODO:доделать запись к специалисту
-        //val schedule = Schedule(selectedDate, "9:00", specialistId)
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             showExitDialog()
